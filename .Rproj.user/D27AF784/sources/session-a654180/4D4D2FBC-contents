@@ -16,15 +16,13 @@ execute:
 
 ## Introduction
 
-Dean Karlan and John List (2007) carried out a natural field experiment to investigate the effectiveness of different matching grant rates (1:1, 2:1, and 3:1) in charitable fundraising. In this homework, we replicate and discuss some key results:
+Dean Karlan and John List (2007) carried out a natural field experiment to investigate the effectiveness of different matching grant rates (1:1, 2:1, and 3:1) in charitable fundraising. In this work, I replicated and discussed some key results:
 
 - Checking randomization balance  
 - Estimating the effect of any matching grant on donation probability  
 - Comparing different match ratios  
 - Examining the size of donations  
 - Demonstrating the Law of Large Numbers (LLN) and Central Limit Theorem (CLT) with simulations
-
-Below is a condensed Quarto file. I removed non-essential instructions, provided result interpretations, and only showed essential code. Parts of the code are hidden to keep the final document concise.
 
 ```{python}
 #| echo: true
@@ -237,4 +235,4 @@ for s in [50, 200, 500, 1000]:
 
 ## Conclusion
 
-Our results replicate those of Karlan and List (2007): matching grants increase donation rates, but higher match ratios do not improve outcomes further. The average donation amount is unaffected. Simulations illustrate the LLN and CLT in practice.
+My results replicate those of Karlan and List (2007): matching grants increase donation rates, but higher match ratios do not improve outcomes further. The average donation amount is unaffected. Simulations illustrate the LLN and CLT in practice.
