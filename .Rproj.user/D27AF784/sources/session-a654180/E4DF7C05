@@ -3,7 +3,7 @@
     "path": "~/Downloads/quarto_website/blog/HW1/hw1_questions.qmd",
     "project_path": "blog/HW1/hw1_questions.qmd",
     "type": "quarto_markdown",
-    "hash": "0",
+    "hash": "3193042609",
     "contents": "",
     "dirty": false,
     "created": 1745462752788.0,
@@ -12,15 +12,15 @@
     "properties": {
         "source_window_id": "",
         "Source": "Source",
-        "cursorPosition": "80,4",
-        "scrollLine": "53"
+        "cursorPosition": "297,0",
+        "scrollLine": "270"
     },
     "folds": "",
-    "lastKnownWriteTime": 1745469233,
+    "lastKnownWriteTime": 1745479975,
     "encoding": "UTF-8",
     "collab_server": "",
     "source_window": "",
-    "last_content_update": 1745469233124,
+    "last_content_update": 1745479975873,
     "read_only": false,
     "read_only_alternatives": []
 }
