@@ -3,7 +3,7 @@
     "path": "~/Downloads/quarto_website/blog/HW1/hw1_questions.qmd",
     "project_path": "blog/HW1/hw1_questions.qmd",
     "type": "quarto_markdown",
-    "hash": "3899927667",
+    "hash": "0",
     "contents": "",
     "dirty": false,
     "created": 1745462752788.0,
@@ -12,8 +12,8 @@
     "properties": {
         "source_window_id": "",
         "Source": "Source",
-        "cursorPosition": "10,47",
-        "scrollLine": "4"
+        "cursorPosition": "80,4",
+        "scrollLine": "53"
     },
     "folds": "",
     "lastKnownWriteTime": 1745469233,
