@@ -1,14 +1,17 @@
 ---
 title: "A Replication of Karlan and List (2007)"
 author: "Idris Huang"
-date: "April 23, 2025"
+date: "Apr 23, 2025"
 format: 
   html:
     code-fold: true
     code-summary: "Show/Hide Code"
     toc: true
     toc-depth: 2
-jupyter: python3
+execute: 
+  echo: true
+  eval: false
+  freeze: true
 ---
 
 ## Introduction
