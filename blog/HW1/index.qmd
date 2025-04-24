@@ -302,7 +302,10 @@ The results replicate those of Karlan and List (2007): matching grants increase 
 #| echo: true
 #| eval: false 
 
-# A Replication of Karlan and List (2007) - Python Version
+## Full Code
+
+```python
+# A Replication of Karlan and List (2007)
 import numpy as np
 import pandas as pd
 import statsmodels.api as sm
@@ -341,6 +344,11 @@ short_summary(model_bal, label="OLS for mrm2 on treatment")
 # Charitable Contributions
 gave_treat_mean = df_treat['gave'].mean()
 gave_cont_mean = df_cont['gave'].mean()
+plt.bar(["Control", "Treatment"], [gave_cont_mean, gave_treat_mean], color=["#1f77b4","#ff7f0e"])
+plt.title("Proportion Who Donated: Control vs Treatment")
+plt.ylabel("Proportion")
+plt.show()
+
 gave_treat_vals = df_treat['gave']
 gave_cont_vals = df_cont['gave']
 t_gave, p_gave, df_g = ttest_ind(gave_treat_vals, gave_cont_vals, usevar='unequal')
@@ -374,6 +382,24 @@ t_amt_g, p_amt_g, df_amt_g = ttest_ind(amt_treat_g, amt_cont_g, usevar='unequal'
 model_amt_cond_ols = smf.ols("amount ~ treatment", data=df_givers).fit()
 short_summary(model_amt_cond_ols, label="OLS for amount among donors")
 
+# Histograms
+mean_treat_g = amt_treat_g.mean()
+mean_cont_g = amt_cont_g.mean()
+
+plt.hist(amt_treat_g, bins=30, color="#9467bd")
+plt.axvline(mean_treat_g, color='red', linestyle='--', linewidth=2)
+plt.title("Histogram: Donation Amounts (Treatment donors)")
+plt.xlabel("Donation Amount")
+plt.ylabel("Frequency")
+plt.show()
+
+plt.hist(amt_cont_g, bins=30, color="#d62728")
+plt.axvline(mean_cont_g, color='red', linestyle='--', linewidth=2)
+plt.title("Histogram: Donation Amounts (Control donors)")
+plt.xlabel("Donation Amount")
+plt.ylabel("Frequency")
+plt.show()
+
 # LLN Simulation
 N_sims = 10000
 p_c = 0.018
@@ -382,6 +408,13 @@ sim_c = np.random.binomial(1, p_c, size=N_sims)
 sim_t = np.random.binomial(1, p_t, size=N_sims)
 diff_vec = sim_t - sim_c
 cum_avg = np.cumsum(diff_vec) / np.arange(1, N_sims+1)
+
+plt.plot(cum_avg, color="#2ca02c")
+plt.axhline(y=(p_t - p_c), color='red', linestyle='--')
+plt.title("Cumulative Average of Differences (Treatment - Control)")
+plt.xlabel("Number of draws")
+plt.ylabel("Cumulative average difference")
+plt.show()
 
 # CLT Simulation
 def draw_mean_diffs(n_control, n_treatment, iters=1000):
@@ -393,7 +426,13 @@ def draw_mean_diffs(n_control, n_treatment, iters=1000):
     return np.array(out)
 
 for s in [50, 200, 500, 1000]:
-    diffs = draw_mean_diffs(s, s)
+    diffs_s = draw_mean_diffs(s, s)
+    plt.hist(diffs_s, bins=30, color="#ff7f0e", alpha=0.8)
+    plt.axvline(0, color='black', linestyle='--')
+    plt.title(f"Histogram of Differences (n={s}, 1000 reps)")
+    plt.xlabel("Difference in means (treat - control)")
+    plt.ylabel("Frequency")
+    plt.show()
 ```
 
 
