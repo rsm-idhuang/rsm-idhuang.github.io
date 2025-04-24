@@ -1,0 +1,13 @@
+---
+title: "Idris Huang"
+image: "images/IMG_0791b.png"
+about:
+  template: jolla
+  links:
+    - icon: envelope
+      href: mailto:idhuang@ucsd.edu
+    - icon: linkedin
+      href: https://www.linkedin.com/in/idris-huang/
+---
+
+Here is a paragraph about me!

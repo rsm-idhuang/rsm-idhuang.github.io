@@ -1,0 +1,72 @@
+[
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Idris Huang",
+    "section": "",
+    "text": "Here is a paragraph about me!"
+  },
+  {
+    "objectID": "about.html",
+    "href": "about.html",
+    "title": "About",
+    "section": "",
+    "text": "About this site\n\n1 + 1\n\n[1] 2"
+  },
+  {
+    "objectID": "resume.html",
+    "href": "resume.html",
+    "title": "Resume",
+    "section": "",
+    "text": "Download PDF file."
+  },
+  {
+    "objectID": "blog.html",
+    "href": "blog.html",
+    "title": "My Projects",
+    "section": "",
+    "text": "This is Project 2\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nThis is Project 1\n\n\n\n\n\n\n\n\n\n\n\n\n\nNo matching items"
+  },
+  {
+    "objectID": "blog/project 1/index.html",
+    "href": "blog/project 1/index.html",
+    "title": "This is Project 1",
+    "section": "",
+    "text": "I cleaned some data\n\n\n\nI analyzed the data\n\nlibrary(tidyverse)\nmtcars |&gt;\n  ggplot(aes(x = wt, y = mpg)) + geom_point()"
+  },
+  {
+    "objectID": "blog/project 1/index.html#section-1-data",
+    "href": "blog/project 1/index.html#section-1-data",
+    "title": "This is Project 1",
+    "section": "",
+    "text": "I cleaned some data"
+  },
+  {
+    "objectID": "blog/project 1/index.html#section-2-analysis",
+    "href": "blog/project 1/index.html#section-2-analysis",
+    "title": "This is Project 1",
+    "section": "",
+    "text": "I analyzed the data\n\nlibrary(tidyverse)\nmtcars |&gt;\n  ggplot(aes(x = wt, y = mpg)) + geom_point()"
+  },
+  {
+    "objectID": "blog/project 2/index.html",
+    "href": "blog/project 2/index.html",
+    "title": "This is Project 2",
+    "section": "",
+    "text": "I cleaned some data\n\n\n\nI analyzed the data"
+  },
+  {
+    "objectID": "blog/project 2/index.html#section-1-data",
+    "href": "blog/project 2/index.html#section-1-data",
+    "title": "This is Project 2",
+    "section": "",
+    "text": "I cleaned some data"
+  },
+  {
+    "objectID": "blog/project 2/index.html#section-2-analysis",
+    "href": "blog/project 2/index.html#section-2-analysis",
+    "title": "This is Project 2",
+    "section": "",
+    "text": "I analyzed the data"
+  }
+]
