@@ -212,7 +212,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
 <li>Demonstrating the Law of Large Numbers (LLN) and Central Limit Theorem (CLT) with simulations</li>
 </ul>
-<div id="59383fb4" class="cell" data-execution_count="1">
+<div id="d5bbedf1" class="cell" data-execution_count="1">
 <details class="code-fold">
 <summary>Show/Hide Code</summary>
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
@@ -246,12 +246,69 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="data" class="level2">
 <h2 class="anchored" data-anchor-id="data">Data</h2>
-<div id="dad75e72" class="cell" data-execution_count="2">
+<div id="6cd23721" class="cell" data-execution_count="2">
 <details class="code-fold">
 <summary>Show/Hide Code</summary>
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Columns:</span><span class="ch">\n</span><span class="st">"</span>, df.columns.tolist())</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"</span><span class="ch">\n</span><span class="st">Summary statistics:</span><span class="ch">\n</span><span class="st">"</span>, df.describe())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
+<div class="cell-output cell-output-stdout">
+<pre><code>Columns:
+ ['treatment', 'control', 'ratio', 'ratio2', 'ratio3', 'size', 'size25', 'size50', 'size100', 'sizeno', 'ask', 'askd1', 'askd2', 'askd3', 'ask1', 'ask2', 'ask3', 'amount', 'gave', 'amountchange', 'hpa', 'ltmedmra', 'freq', 'years', 'year5', 'mrm2', 'dormant', 'female', 'couple', 'state50one', 'nonlit', 'cases', 'statecnt', 'stateresponse', 'stateresponset', 'stateresponsec', 'stateresponsetminc', 'perbush', 'close25', 'red0', 'blue0', 'redcty', 'bluecty', 'pwhite', 'pblack', 'page18_39', 'ave_hh_sz', 'median_hhincome', 'powner', 'psch_atlstba', 'pop_propurban']
+
+Summary statistics:
+           treatment       control        ratio2        ratio3        size25  \
+count  50083.000000  50083.000000  50083.000000  50083.000000  50083.000000   
+mean       0.666813      0.333187      0.222311      0.222211      0.166723   
+std        0.471357      0.471357      0.415803      0.415736      0.372732   
+min        0.000000      0.000000      0.000000      0.000000      0.000000   
+25%        0.000000      0.000000      0.000000      0.000000      0.000000   
+50%        1.000000      0.000000      0.000000      0.000000      0.000000   
+75%        1.000000      1.000000      0.000000      0.000000      0.000000   
+max        1.000000      1.000000      1.000000      1.000000      1.000000   
+
+             size50       size100        sizeno         askd1         askd2  \
+count  50083.000000  50083.000000  50083.000000  50083.000000  50083.000000   
+mean       0.166623      0.166723      0.166743      0.222311      0.222291   
+std        0.372643      0.372732      0.372750      0.415803      0.415790   
+min        0.000000      0.000000      0.000000      0.000000      0.000000   
+25%        0.000000      0.000000      0.000000      0.000000      0.000000   
+50%        0.000000      0.000000      0.000000      0.000000      0.000000   
+75%        0.000000      0.000000      0.000000      0.000000      0.000000   
+max        1.000000      1.000000      1.000000      1.000000      1.000000   
+
+       ...        redcty       bluecty        pwhite        pblack  \
+count  ...  49978.000000  49978.000000  48217.000000  48047.000000   
+mean   ...      0.510245      0.488715      0.819599      0.086710   
+std    ...      0.499900      0.499878      0.168561      0.135868   
+min    ...      0.000000      0.000000      0.009418      0.000000   
+25%    ...      0.000000      0.000000      0.755845      0.014729   
+50%    ...      1.000000      0.000000      0.872797      0.036554   
+75%    ...      1.000000      1.000000      0.938827      0.090882   
+max    ...      1.000000      1.000000      1.000000      0.989622   
+
+          page18_39     ave_hh_sz  median_hhincome        powner  \
+count  48217.000000  48221.000000     48209.000000  48214.000000   
+mean       0.321694      2.429012     54815.700533      0.669418   
+std        0.103039      0.378115     22027.316665      0.193405   
+min        0.000000      0.000000      5000.000000      0.000000   
+25%        0.258311      2.210000     39181.000000      0.560222   
+50%        0.305534      2.440000     50673.000000      0.712296   
+75%        0.369132      2.660000     66005.000000      0.816798   
+max        0.997544      5.270000    200001.000000      1.000000   
+
+       psch_atlstba  pop_propurban  
+count  48215.000000   48217.000000  
+mean       0.391661       0.871968  
+std        0.186599       0.258654  
+min        0.000000       0.000000  
+25%        0.235647       0.884929  
+50%        0.373744       1.000000  
+75%        0.530036       1.000000  
+max        1.000000       1.000000  
+
+[8 rows x 48 columns]</code></pre>
+</div>
 </div>
 <div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
@@ -490,18 +547,26 @@ Variable Definitions
 </section>
 <section id="balance-test" class="level2">
 <h2 class="anchored" data-anchor-id="balance-test">Balance Test</h2>
-<div id="c911e382" class="cell" data-execution_count="3">
+<div id="23d4a178" class="cell" data-execution_count="3">
 <details class="code-fold">
 <summary>Show/Hide Code</summary>
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>mrm2_treat <span class="op">=</span> df_treat[<span class="st">'mrm2'</span>].dropna()</span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>mrm2_cont  <span class="op">=</span> df_cont[<span class="st">'mrm2'</span>].dropna()</span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>t_stat, p_val, df_deg <span class="op">=</span> ttest_ind(mrm2_treat, mrm2_cont, usevar<span class="op">=</span><span class="st">'unequal'</span>)</span>
-<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"T-test for mrm2: t=</span><span class="sc">{</span>t_stat<span class="sc">:.4f}</span><span class="ss">, p=</span><span class="sc">{</span>p_val<span class="sc">:.4g}</span><span class="ss">, df=</span><span class="sc">{</span>df_deg<span class="sc">:.1f}</span><span class="ss">"</span>)</span>
-<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>model_bal <span class="op">=</span> smf.ols(<span class="st">"mrm2 ~ treatment"</span>, data<span class="op">=</span>df).fit()</span>
-<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>short_summary(model_bal, label<span class="op">=</span><span class="st">"OLS for mrm2 on treatment"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>mrm2_treat <span class="op">=</span> df_treat[<span class="st">'mrm2'</span>].dropna()</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>mrm2_cont  <span class="op">=</span> df_cont[<span class="st">'mrm2'</span>].dropna()</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>t_stat, p_val, df_deg <span class="op">=</span> ttest_ind(mrm2_treat, mrm2_cont, usevar<span class="op">=</span><span class="st">'unequal'</span>)</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"T-test for mrm2: t=</span><span class="sc">{</span>t_stat<span class="sc">:.4f}</span><span class="ss">, p=</span><span class="sc">{</span>p_val<span class="sc">:.4g}</span><span class="ss">, df=</span><span class="sc">{</span>df_deg<span class="sc">:.1f}</span><span class="ss">"</span>)</span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>model_bal <span class="op">=</span> smf.ols(<span class="st">"mrm2 ~ treatment"</span>, data<span class="op">=</span>df).fit()</span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>short_summary(model_bal, label<span class="op">=</span><span class="st">"OLS for mrm2 on treatment"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
+<div class="cell-output cell-output-stdout">
+<pre><code>T-test for mrm2: t=0.1195, p=0.9049, df=33394.5
+=== OLS for mrm2 on treatment ===
+                coef   std err           t     P&gt;|t|
+Intercept  12.998142  0.093526  138.978873  0.000000
+treatment   0.013686  0.114534    0.119492  0.904886
+</code></pre>
+</div>
 </div>
 <p><strong>Result:</strong> No significant difference in <code>mrm2</code>, suggesting balance.</p>
 </section>
@@ -511,13 +576,16 @@ Variable Definitions
 <h3 class="anchored" data-anchor-id="charitable-contribution-made">1. Charitable Contribution Made</h3>
 <section id="a.-bar-plot" class="level4">
 <h4 class="anchored" data-anchor-id="a.-bar-plot">A. Bar Plot</h4>
-<div id="922e7980" class="cell" data-execution_count="4">
+<div id="cc8f6e85" class="cell" data-execution_count="4">
 <details class="code-fold">
 <summary>Show/Hide Code</summary>
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>gave_treat_mean <span class="op">=</span> df_treat[<span class="st">'gave'</span>].mean()</span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>gave_cont_mean  <span class="op">=</span> df_cont[<span class="st">'gave'</span>].mean()</span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Proportion gave - Control:"</span>, gave_cont_mean, <span class="st">"Treatment:"</span>, gave_treat_mean)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>gave_treat_mean <span class="op">=</span> df_treat[<span class="st">'gave'</span>].mean()</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>gave_cont_mean  <span class="op">=</span> df_cont[<span class="st">'gave'</span>].mean()</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Proportion gave - Control:"</span>, gave_cont_mean, <span class="st">"Treatment:"</span>, gave_treat_mean)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
+<div class="cell-output cell-output-stdout">
+<pre><code>Proportion gave - Control: 0.017858212980164198 Treatment: 0.02203856749311295</code></pre>
+</div>
 </div>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
@@ -528,47 +596,75 @@ Variable Definitions
 </section>
 <section id="b.-t-test-regression" class="level4">
 <h4 class="anchored" data-anchor-id="b.-t-test-regression">B. T-test &amp; Regression</h4>
-<div id="58ca04f6" class="cell" data-execution_count="5">
+<div id="ef91d12f" class="cell" data-execution_count="5">
 <details class="code-fold">
 <summary>Show/Hide Code</summary>
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>gave_treat_vals <span class="op">=</span> df_treat[<span class="st">'gave'</span>]</span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>gave_cont_vals  <span class="op">=</span> df_cont[<span class="st">'gave'</span>]</span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>t_gave, p_gave, df_g <span class="op">=</span> ttest_ind(gave_treat_vals, gave_cont_vals, usevar<span class="op">=</span><span class="st">'unequal'</span>)</span>
-<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"gave T-test: t=</span><span class="sc">{</span>t_gave<span class="sc">:.4f}</span><span class="ss">, p=</span><span class="sc">{</span>p_gave<span class="sc">:.4g}</span><span class="ss">, df=</span><span class="sc">{</span>df_g<span class="sc">:.1f}</span><span class="ss">"</span>)</span>
-<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>model_gave_ols <span class="op">=</span> smf.ols(<span class="st">"gave ~ treatment"</span>, data<span class="op">=</span>df).fit()</span>
-<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>short_summary(model_gave_ols, label<span class="op">=</span><span class="st">"OLS for gave"</span>)</span>
-<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>model_gave_probit <span class="op">=</span> smf.probit(<span class="st">"gave ~ treatment"</span>, data<span class="op">=</span>df).fit(disp<span class="op">=</span><span class="va">False</span>)</span>
-<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>short_summary(model_gave_probit, label<span class="op">=</span><span class="st">"Probit for gave"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>gave_treat_vals <span class="op">=</span> df_treat[<span class="st">'gave'</span>]</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>gave_cont_vals  <span class="op">=</span> df_cont[<span class="st">'gave'</span>]</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>t_gave, p_gave, df_g <span class="op">=</span> ttest_ind(gave_treat_vals, gave_cont_vals, usevar<span class="op">=</span><span class="st">'unequal'</span>)</span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"gave T-test: t=</span><span class="sc">{</span>t_gave<span class="sc">:.4f}</span><span class="ss">, p=</span><span class="sc">{</span>p_gave<span class="sc">:.4g}</span><span class="ss">, df=</span><span class="sc">{</span>df_g<span class="sc">:.1f}</span><span class="ss">"</span>)</span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>model_gave_ols <span class="op">=</span> smf.ols(<span class="st">"gave ~ treatment"</span>, data<span class="op">=</span>df).fit()</span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>short_summary(model_gave_ols, label<span class="op">=</span><span class="st">"OLS for gave"</span>)</span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a>model_gave_probit <span class="op">=</span> smf.probit(<span class="st">"gave ~ treatment"</span>, data<span class="op">=</span>df).fit(disp<span class="op">=</span><span class="va">False</span>)</span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a>short_summary(model_gave_probit, label<span class="op">=</span><span class="st">"Probit for gave"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
+<div class="cell-output cell-output-stdout">
+<pre><code>gave T-test: t=3.2095, p=0.001331, df=36576.8
+=== OLS for gave ===
+               coef   std err          t         P&gt;|t|
+Intercept  0.017858  0.001101  16.224643  4.779032e-59
+treatment  0.004180  0.001348   3.101361  1.927403e-03
+
+=== Probit for gave ===
+               coef   std err         t     P&gt;|t|
+Intercept -2.100141  0.023316 -90.07277  0.000000
+treatment  0.086785  0.027879   3.11293  0.001852
+</code></pre>
+</div>
 </div>
 <p><strong>Result:</strong> Matching grants significantly increase donation probability, though the effect size is small.</p>
 </section>
 </section>
 <section id="differences-between-match-rates" class="level3">
 <h3 class="anchored" data-anchor-id="differences-between-match-rates">2. Differences Between Match Rates</h3>
-<div id="09769d9c" class="cell" data-execution_count="6">
+<div id="4f733777" class="cell" data-execution_count="6">
 <details class="code-fold">
 <summary>Show/Hide Code</summary>
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>gave_1to1 <span class="op">=</span> df[df[<span class="st">'ratio'</span>] <span class="op">==</span> <span class="dv">1</span>][<span class="st">'gave'</span>]</span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>gave_2to1 <span class="op">=</span> df[df[<span class="st">'ratio2'</span>] <span class="op">==</span> <span class="dv">1</span>][<span class="st">'gave'</span>]</span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>gave_3to1 <span class="op">=</span> df[df[<span class="st">'ratio3'</span>] <span class="op">==</span> <span class="dv">1</span>][<span class="st">'gave'</span>]</span>
-<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>t_12, p_12, df_12 <span class="op">=</span> ttest_ind(gave_1to1, gave_2to1, usevar<span class="op">=</span><span class="st">'unequal'</span>)</span>
-<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>t_23, p_23, df_23 <span class="op">=</span> ttest_ind(gave_2to1, gave_3to1, usevar<span class="op">=</span><span class="st">'unequal'</span>)</span>
-<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"1:1 vs 2:1 =&gt; t=</span><span class="sc">{</span>t_12<span class="sc">:.4f}</span><span class="ss">, p=</span><span class="sc">{</span>p_12<span class="sc">:.4g}</span><span class="ss">"</span>)</span>
-<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"2:1 vs 3:1 =&gt; t=</span><span class="sc">{</span>t_23<span class="sc">:.4f}</span><span class="ss">, p=</span><span class="sc">{</span>p_23<span class="sc">:.4g}</span><span class="ss">"</span>)</span>
-<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>model_ratio <span class="op">=</span> smf.ols(<span class="st">"gave ~ ratio + ratio2 + ratio3"</span>, data<span class="op">=</span>df).fit()</span>
-<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a>short_summary(model_ratio, label<span class="op">=</span><span class="st">"OLS for gave on ratio dummies"</span>)</span>
-<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a>r_1 <span class="op">=</span> gave_1to1.mean()</span>
-<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a>r_2 <span class="op">=</span> gave_2to1.mean()</span>
-<span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a>r_3 <span class="op">=</span> gave_3to1.mean()</span>
-<span id="cb6-16"><a href="#cb6-16" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Diff(1:1 vs 2:1):"</span>, r_2 <span class="op">-</span> r_1)</span>
-<span id="cb6-17"><a href="#cb6-17" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Diff(2:1 vs 3:1):"</span>, r_3 <span class="op">-</span> r_2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>gave_1to1 <span class="op">=</span> df[df[<span class="st">'ratio'</span>] <span class="op">==</span> <span class="dv">1</span>][<span class="st">'gave'</span>]</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>gave_2to1 <span class="op">=</span> df[df[<span class="st">'ratio2'</span>] <span class="op">==</span> <span class="dv">1</span>][<span class="st">'gave'</span>]</span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>gave_3to1 <span class="op">=</span> df[df[<span class="st">'ratio3'</span>] <span class="op">==</span> <span class="dv">1</span>][<span class="st">'gave'</span>]</span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>t_12, p_12, df_12 <span class="op">=</span> ttest_ind(gave_1to1, gave_2to1, usevar<span class="op">=</span><span class="st">'unequal'</span>)</span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>t_23, p_23, df_23 <span class="op">=</span> ttest_ind(gave_2to1, gave_3to1, usevar<span class="op">=</span><span class="st">'unequal'</span>)</span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"1:1 vs 2:1 =&gt; t=</span><span class="sc">{</span>t_12<span class="sc">:.4f}</span><span class="ss">, p=</span><span class="sc">{</span>p_12<span class="sc">:.4g}</span><span class="ss">"</span>)</span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"2:1 vs 3:1 =&gt; t=</span><span class="sc">{</span>t_23<span class="sc">:.4f}</span><span class="ss">, p=</span><span class="sc">{</span>p_23<span class="sc">:.4g}</span><span class="ss">"</span>)</span>
+<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a>model_ratio <span class="op">=</span> smf.ols(<span class="st">"gave ~ ratio + ratio2 + ratio3"</span>, data<span class="op">=</span>df).fit()</span>
+<span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a>short_summary(model_ratio, label<span class="op">=</span><span class="st">"OLS for gave on ratio dummies"</span>)</span>
+<span id="cb10-12"><a href="#cb10-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-13"><a href="#cb10-13" aria-hidden="true" tabindex="-1"></a>r_1 <span class="op">=</span> gave_1to1.mean()</span>
+<span id="cb10-14"><a href="#cb10-14" aria-hidden="true" tabindex="-1"></a>r_2 <span class="op">=</span> gave_2to1.mean()</span>
+<span id="cb10-15"><a href="#cb10-15" aria-hidden="true" tabindex="-1"></a>r_3 <span class="op">=</span> gave_3to1.mean()</span>
+<span id="cb10-16"><a href="#cb10-16" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Diff(1:1 vs 2:1):"</span>, r_2 <span class="op">-</span> r_1)</span>
+<span id="cb10-17"><a href="#cb10-17" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Diff(2:1 vs 3:1):"</span>, r_3 <span class="op">-</span> r_2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
+<div class="cell-output cell-output-stdout">
+<pre><code>1:1 vs 2:1 =&gt; t=-0.9650, p=0.3345
+2:1 vs 3:1 =&gt; t=-0.0501, p=0.96
+=== OLS for gave on ratio dummies ===
+                    coef       std err          t         P&gt;|t|
+Intercept   1.802911e-02  1.386416e-03  13.004112  1.339110e-38
+ratio[T.1]  2.732484e-03  1.914416e-03   1.427320  1.534940e-01
+ratio[T.2] -3.535509e+10  2.437258e+11  -0.145061  8.846633e-01
+ratio[T.3] -1.520186e+09  1.038114e+10  -0.146437  8.835767e-01
+ratio2      3.535509e+10  2.437258e+11   0.145061  8.846633e-01
+ratio3      1.520186e+09  1.038114e+10   0.146437  8.835767e-01
+
+Diff(1:1 vs 2:1): 0.0018842510217149944
+Diff(2:1 vs 3:1): 0.00010002398025293902</code></pre>
+</div>
 </div>
 <p><strong>Result:</strong> No evidence that higher match ratios lead to significantly greater giving.</p>
 </section>
@@ -576,27 +672,41 @@ Variable Definitions
 <h3 class="anchored" data-anchor-id="size-of-charitable-contribution">3. Size of Charitable Contribution</h3>
 <section id="a.-unconditional-and-conditional" class="level4">
 <h4 class="anchored" data-anchor-id="a.-unconditional-and-conditional">A. Unconditional and Conditional</h4>
-<div id="c7ef4587" class="cell" data-execution_count="7">
+<div id="0238208b" class="cell" data-execution_count="7">
 <details class="code-fold">
 <summary>Show/Hide Code</summary>
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>amt_treat <span class="op">=</span> df_treat[<span class="st">'amount'</span>].fillna(<span class="dv">0</span>)</span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>amt_cont  <span class="op">=</span> df_cont[<span class="st">'amount'</span>].fillna(<span class="dv">0</span>)</span>
-<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>t_amt, p_amt, _ <span class="op">=</span> ttest_ind(amt_treat, amt_cont, usevar<span class="op">=</span><span class="st">'unequal'</span>)</span>
-<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Uncond. amount T-test: t=</span><span class="sc">{</span>t_amt<span class="sc">:.4f}</span><span class="ss">, p=</span><span class="sc">{</span>p_amt<span class="sc">:.4g}</span><span class="ss">"</span>)</span>
-<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>model_amt_ols <span class="op">=</span> smf.ols(<span class="st">"amount ~ treatment"</span>, data<span class="op">=</span>df).fit()</span>
-<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>short_summary(model_amt_ols, label<span class="op">=</span><span class="st">"OLS for unconditional 'amount'"</span>)</span>
-<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>df_givers <span class="op">=</span> df[df[<span class="st">'gave'</span>] <span class="op">==</span> <span class="dv">1</span>]</span>
-<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a>amt_treat_g <span class="op">=</span> df_givers[df_givers[<span class="st">'treatment'</span>]<span class="op">==</span><span class="dv">1</span>][<span class="st">'amount'</span>]</span>
-<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a>amt_cont_g  <span class="op">=</span> df_givers[df_givers[<span class="st">'control'</span>] <span class="op">==</span><span class="dv">1</span>][<span class="st">'amount'</span>]</span>
-<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a>t_amt_g, p_amt_g, _ <span class="op">=</span> ttest_ind(amt_treat_g, amt_cont_g, usevar<span class="op">=</span><span class="st">'unequal'</span>)</span>
-<span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Cond. amount T-test: t=</span><span class="sc">{</span>t_amt_g<span class="sc">:.4f}</span><span class="ss">, p=</span><span class="sc">{</span>p_amt_g<span class="sc">:.4g}</span><span class="ss">"</span>)</span>
-<span id="cb7-15"><a href="#cb7-15" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-16"><a href="#cb7-16" aria-hidden="true" tabindex="-1"></a>model_amt_cond_ols <span class="op">=</span> smf.ols(<span class="st">"amount ~ treatment"</span>, data<span class="op">=</span>df_givers).fit()</span>
-<span id="cb7-17"><a href="#cb7-17" aria-hidden="true" tabindex="-1"></a>short_summary(model_amt_cond_ols, label<span class="op">=</span><span class="st">"OLS for amount among donors"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>amt_treat <span class="op">=</span> df_treat[<span class="st">'amount'</span>].fillna(<span class="dv">0</span>)</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>amt_cont  <span class="op">=</span> df_cont[<span class="st">'amount'</span>].fillna(<span class="dv">0</span>)</span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>t_amt, p_amt, _ <span class="op">=</span> ttest_ind(amt_treat, amt_cont, usevar<span class="op">=</span><span class="st">'unequal'</span>)</span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Uncond. amount T-test: t=</span><span class="sc">{</span>t_amt<span class="sc">:.4f}</span><span class="ss">, p=</span><span class="sc">{</span>p_amt<span class="sc">:.4g}</span><span class="ss">"</span>)</span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>model_amt_ols <span class="op">=</span> smf.ols(<span class="st">"amount ~ treatment"</span>, data<span class="op">=</span>df).fit()</span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a>short_summary(model_amt_ols, label<span class="op">=</span><span class="st">"OLS for unconditional 'amount'"</span>)</span>
+<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a>df_givers <span class="op">=</span> df[df[<span class="st">'gave'</span>] <span class="op">==</span> <span class="dv">1</span>]</span>
+<span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a>amt_treat_g <span class="op">=</span> df_givers[df_givers[<span class="st">'treatment'</span>]<span class="op">==</span><span class="dv">1</span>][<span class="st">'amount'</span>]</span>
+<span id="cb12-11"><a href="#cb12-11" aria-hidden="true" tabindex="-1"></a>amt_cont_g  <span class="op">=</span> df_givers[df_givers[<span class="st">'control'</span>] <span class="op">==</span><span class="dv">1</span>][<span class="st">'amount'</span>]</span>
+<span id="cb12-12"><a href="#cb12-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-13"><a href="#cb12-13" aria-hidden="true" tabindex="-1"></a>t_amt_g, p_amt_g, _ <span class="op">=</span> ttest_ind(amt_treat_g, amt_cont_g, usevar<span class="op">=</span><span class="st">'unequal'</span>)</span>
+<span id="cb12-14"><a href="#cb12-14" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Cond. amount T-test: t=</span><span class="sc">{</span>t_amt_g<span class="sc">:.4f}</span><span class="ss">, p=</span><span class="sc">{</span>p_amt_g<span class="sc">:.4g}</span><span class="ss">"</span>)</span>
+<span id="cb12-15"><a href="#cb12-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-16"><a href="#cb12-16" aria-hidden="true" tabindex="-1"></a>model_amt_cond_ols <span class="op">=</span> smf.ols(<span class="st">"amount ~ treatment"</span>, data<span class="op">=</span>df_givers).fit()</span>
+<span id="cb12-17"><a href="#cb12-17" aria-hidden="true" tabindex="-1"></a>short_summary(model_amt_cond_ols, label<span class="op">=</span><span class="st">"OLS for amount among donors"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
+<div class="cell-output cell-output-stdout">
+<pre><code>Uncond. amount T-test: t=1.9183, p=0.05509
+=== OLS for unconditional 'amount' ===
+               coef   std err          t         P&gt;|t|
+Intercept  0.813268  0.067418  12.062995  1.843438e-33
+treatment  0.153605  0.082561   1.860503  6.282029e-02
+
+Cond. amount T-test: t=-0.5846, p=0.559
+=== OLS for amount among donors ===
+                coef   std err          t         P&gt;|t|
+Intercept  45.540268  2.423378  18.792063  5.473578e-68
+treatment  -1.668393  2.872384  -0.580839  5.614756e-01
+</code></pre>
+</div>
 </div>
 <p><strong>Result:</strong> Very small/unreliable difference in donation amounts.</p>
 </section>
@@ -612,17 +722,17 @@ Variable Definitions
 <h2 class="anchored" data-anchor-id="simulation-experiments">Simulation Experiments</h2>
 <section id="law-of-large-numbers" class="level3">
 <h3 class="anchored" data-anchor-id="law-of-large-numbers">Law of Large Numbers</h3>
-<div id="77ab91e2" class="cell" data-execution_count="8">
+<div id="8bd81cd8" class="cell" data-execution_count="8">
 <details class="code-fold">
 <summary>Show/Hide Code</summary>
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>N_sims <span class="op">=</span> <span class="dv">10000</span></span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>p_c <span class="op">=</span> <span class="fl">0.018</span></span>
-<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>p_t <span class="op">=</span> <span class="fl">0.022</span></span>
-<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>sim_c <span class="op">=</span> np.random.binomial(<span class="dv">1</span>, p_c, N_sims)</span>
-<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>sim_t <span class="op">=</span> np.random.binomial(<span class="dv">1</span>, p_t, N_sims)</span>
-<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>diff_vec <span class="op">=</span> sim_t <span class="op">-</span> sim_c</span>
-<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>cum_avg <span class="op">=</span> np.cumsum(diff_vec)<span class="op">/</span>np.arange(<span class="dv">1</span>,N_sims<span class="op">+</span><span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>N_sims <span class="op">=</span> <span class="dv">10000</span></span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>p_c <span class="op">=</span> <span class="fl">0.018</span></span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>p_t <span class="op">=</span> <span class="fl">0.022</span></span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a>sim_c <span class="op">=</span> np.random.binomial(<span class="dv">1</span>, p_c, N_sims)</span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a>sim_t <span class="op">=</span> np.random.binomial(<span class="dv">1</span>, p_t, N_sims)</span>
+<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a>diff_vec <span class="op">=</span> sim_t <span class="op">-</span> sim_c</span>
+<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a>cum_avg <span class="op">=</span> np.cumsum(diff_vec)<span class="op">/</span>np.arange(<span class="dv">1</span>,N_sims<span class="op">+</span><span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
 <div class="quarto-figure quarto-figure-center">
@@ -635,19 +745,19 @@ Variable Definitions
 </section>
 <section id="central-limit-theorem" class="level3">
 <h3 class="anchored" data-anchor-id="central-limit-theorem">Central Limit Theorem</h3>
-<div id="fb63f12d" class="cell" data-execution_count="9">
+<div id="3395ef75" class="cell" data-execution_count="9">
 <details class="code-fold">
 <summary>Show/Hide Code</summary>
-<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> draw_mean_diffs(n_control, n_treatment, iters<span class="op">=</span><span class="dv">1000</span>):</span>
-<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>    out <span class="op">=</span> []</span>
-<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> _ <span class="kw">in</span> <span class="bu">range</span>(iters):</span>
-<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>        c_draws <span class="op">=</span> np.random.binomial(<span class="dv">1</span>, p_c, n_control)</span>
-<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>        t_draws <span class="op">=</span> np.random.binomial(<span class="dv">1</span>, p_t, n_treatment)</span>
-<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>        out.append(t_draws.mean() <span class="op">-</span> c_draws.mean())</span>
-<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> np.array(out)</span>
-<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> s <span class="kw">in</span> [<span class="dv">50</span>, <span class="dv">200</span>, <span class="dv">500</span>, <span class="dv">1000</span>]:</span>
-<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a>    diffs <span class="op">=</span> draw_mean_diffs(s, s)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> draw_mean_diffs(n_control, n_treatment, iters<span class="op">=</span><span class="dv">1000</span>):</span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>    out <span class="op">=</span> []</span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> _ <span class="kw">in</span> <span class="bu">range</span>(iters):</span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>        c_draws <span class="op">=</span> np.random.binomial(<span class="dv">1</span>, p_c, n_control)</span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>        t_draws <span class="op">=</span> np.random.binomial(<span class="dv">1</span>, p_t, n_treatment)</span>
+<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a>        out.append(t_draws.mean() <span class="op">-</span> c_draws.mean())</span>
+<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> np.array(out)</span>
+<span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-9"><a href="#cb15-9" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> s <span class="kw">in</span> [<span class="dv">50</span>, <span class="dv">200</span>, <span class="dv">500</span>, <span class="dv">1000</span>]:</span>
+<span id="cb15-10"><a href="#cb15-10" aria-hidden="true" tabindex="-1"></a>    diffs <span class="op">=</span> draw_mean_diffs(s, s)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
 <p><img src="CLT_50.png" class="img-fluid" alt="CLT Hist n=50"><br>
@@ -663,101 +773,137 @@ Variable Definitions
 </section>
 <section id="full-code" class="level2">
 <h2 class="anchored" data-anchor-id="full-code">Full Code</h2>
-<div id="4e6abcdb" class="cell" data-execution_count="10">
+<div id="e1c452bb" class="cell" data-execution_count="10">
 <details class="code-fold">
 <summary>Show/Hide Code</summary>
-<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co"># A Replication of Karlan and List (2007) - Python Version</span></span>
-<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
-<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
-<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> statsmodels.api <span class="im">as</span> sm</span>
-<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> statsmodels.formula.api <span class="im">as</span> smf</span>
-<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> statsmodels.stats.weightstats <span class="im">import</span> ttest_ind</span>
-<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
-<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a>plt.rcParams[<span class="st">'axes.prop_cycle'</span>] <span class="op">=</span> plt.cycler(color<span class="op">=</span>[<span class="st">"#2ca02c"</span>,<span class="st">"#ff7f0e"</span>,<span class="st">"#9467bd"</span>,<span class="st">"#d62728"</span>])</span>
-<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a>plt.rcParams[<span class="st">'figure.figsize'</span>] <span class="op">=</span> (<span class="dv">7</span>,<span class="dv">5</span>)</span>
-<span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-12"><a href="#cb10-12" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> short_summary(model, label<span class="op">=</span><span class="va">None</span>):</span>
-<span id="cb10-13"><a href="#cb10-13" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> label:</span>
-<span id="cb10-14"><a href="#cb10-14" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(<span class="ss">f"=== </span><span class="sc">{</span>label<span class="sc">}</span><span class="ss"> ==="</span>)</span>
-<span id="cb10-15"><a href="#cb10-15" aria-hidden="true" tabindex="-1"></a>    df_summary <span class="op">=</span> pd.DataFrame({</span>
-<span id="cb10-16"><a href="#cb10-16" aria-hidden="true" tabindex="-1"></a>        <span class="st">'coef'</span>: model.params,</span>
-<span id="cb10-17"><a href="#cb10-17" aria-hidden="true" tabindex="-1"></a>        <span class="st">'std err'</span>: model.bse,</span>
-<span id="cb10-18"><a href="#cb10-18" aria-hidden="true" tabindex="-1"></a>        <span class="st">'t'</span>: model.tvalues,</span>
-<span id="cb10-19"><a href="#cb10-19" aria-hidden="true" tabindex="-1"></a>        <span class="st">'P&gt;|t|'</span>: model.pvalues</span>
-<span id="cb10-20"><a href="#cb10-20" aria-hidden="true" tabindex="-1"></a>    })</span>
-<span id="cb10-21"><a href="#cb10-21" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(df_summary)</span>
-<span id="cb10-22"><a href="#cb10-22" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>()</span>
-<span id="cb10-23"><a href="#cb10-23" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-24"><a href="#cb10-24" aria-hidden="true" tabindex="-1"></a>data_filepath <span class="op">=</span> <span class="st">"karlan_list_2007.dta"</span></span>
-<span id="cb10-25"><a href="#cb10-25" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> pd.read_stata(data_filepath)</span>
-<span id="cb10-26"><a href="#cb10-26" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-27"><a href="#cb10-27" aria-hidden="true" tabindex="-1"></a><span class="co"># Balance Test</span></span>
-<span id="cb10-28"><a href="#cb10-28" aria-hidden="true" tabindex="-1"></a>df_treat <span class="op">=</span> df[df[<span class="st">'treatment'</span>] <span class="op">==</span> <span class="dv">1</span>]</span>
-<span id="cb10-29"><a href="#cb10-29" aria-hidden="true" tabindex="-1"></a>df_cont <span class="op">=</span> df[df[<span class="st">'control'</span>] <span class="op">==</span> <span class="dv">1</span>]</span>
-<span id="cb10-30"><a href="#cb10-30" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-31"><a href="#cb10-31" aria-hidden="true" tabindex="-1"></a>mrm2_treat <span class="op">=</span> df_treat[<span class="st">'mrm2'</span>].dropna()</span>
-<span id="cb10-32"><a href="#cb10-32" aria-hidden="true" tabindex="-1"></a>mrm2_cont <span class="op">=</span> df_cont[<span class="st">'mrm2'</span>].dropna()</span>
-<span id="cb10-33"><a href="#cb10-33" aria-hidden="true" tabindex="-1"></a>t_stat, p_val, df_deg <span class="op">=</span> ttest_ind(mrm2_treat, mrm2_cont, usevar<span class="op">=</span><span class="st">'unequal'</span>)</span>
-<span id="cb10-34"><a href="#cb10-34" aria-hidden="true" tabindex="-1"></a>model_bal <span class="op">=</span> smf.ols(<span class="st">"mrm2 ~ treatment"</span>, data<span class="op">=</span>df).fit()</span>
-<span id="cb10-35"><a href="#cb10-35" aria-hidden="true" tabindex="-1"></a>short_summary(model_bal, label<span class="op">=</span><span class="st">"OLS for mrm2 on treatment"</span>)</span>
-<span id="cb10-36"><a href="#cb10-36" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-37"><a href="#cb10-37" aria-hidden="true" tabindex="-1"></a><span class="co"># Charitable Contributions</span></span>
-<span id="cb10-38"><a href="#cb10-38" aria-hidden="true" tabindex="-1"></a>gave_treat_mean <span class="op">=</span> df_treat[<span class="st">'gave'</span>].mean()</span>
-<span id="cb10-39"><a href="#cb10-39" aria-hidden="true" tabindex="-1"></a>gave_cont_mean <span class="op">=</span> df_cont[<span class="st">'gave'</span>].mean()</span>
-<span id="cb10-40"><a href="#cb10-40" aria-hidden="true" tabindex="-1"></a>gave_treat_vals <span class="op">=</span> df_treat[<span class="st">'gave'</span>]</span>
-<span id="cb10-41"><a href="#cb10-41" aria-hidden="true" tabindex="-1"></a>gave_cont_vals <span class="op">=</span> df_cont[<span class="st">'gave'</span>]</span>
-<span id="cb10-42"><a href="#cb10-42" aria-hidden="true" tabindex="-1"></a>t_gave, p_gave, df_g <span class="op">=</span> ttest_ind(gave_treat_vals, gave_cont_vals, usevar<span class="op">=</span><span class="st">'unequal'</span>)</span>
-<span id="cb10-43"><a href="#cb10-43" aria-hidden="true" tabindex="-1"></a>model_gave_ols <span class="op">=</span> smf.ols(<span class="st">"gave ~ treatment"</span>, data<span class="op">=</span>df).fit()</span>
-<span id="cb10-44"><a href="#cb10-44" aria-hidden="true" tabindex="-1"></a>short_summary(model_gave_ols, label<span class="op">=</span><span class="st">"OLS for gave on treatment"</span>)</span>
-<span id="cb10-45"><a href="#cb10-45" aria-hidden="true" tabindex="-1"></a>model_gave_probit <span class="op">=</span> smf.probit(<span class="st">"gave ~ treatment"</span>, data<span class="op">=</span>df).fit(disp<span class="op">=</span><span class="va">False</span>)</span>
-<span id="cb10-46"><a href="#cb10-46" aria-hidden="true" tabindex="-1"></a>short_summary(model_gave_probit, label<span class="op">=</span><span class="st">"Probit for gave on treatment"</span>)</span>
-<span id="cb10-47"><a href="#cb10-47" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-48"><a href="#cb10-48" aria-hidden="true" tabindex="-1"></a><span class="co"># Match Ratios</span></span>
-<span id="cb10-49"><a href="#cb10-49" aria-hidden="true" tabindex="-1"></a>gave_1to1 <span class="op">=</span> df[df[<span class="st">'ratio'</span>] <span class="op">==</span> <span class="dv">1</span>][<span class="st">'gave'</span>]</span>
-<span id="cb10-50"><a href="#cb10-50" aria-hidden="true" tabindex="-1"></a>gave_2to1 <span class="op">=</span> df[df[<span class="st">'ratio2'</span>] <span class="op">==</span> <span class="dv">1</span>][<span class="st">'gave'</span>]</span>
-<span id="cb10-51"><a href="#cb10-51" aria-hidden="true" tabindex="-1"></a>gave_3to1 <span class="op">=</span> df[df[<span class="st">'ratio3'</span>] <span class="op">==</span> <span class="dv">1</span>][<span class="st">'gave'</span>]</span>
-<span id="cb10-52"><a href="#cb10-52" aria-hidden="true" tabindex="-1"></a>t_12, p_12, df_12 <span class="op">=</span> ttest_ind(gave_1to1, gave_2to1, usevar<span class="op">=</span><span class="st">'unequal'</span>)</span>
-<span id="cb10-53"><a href="#cb10-53" aria-hidden="true" tabindex="-1"></a>t_23, p_23, df_23 <span class="op">=</span> ttest_ind(gave_2to1, gave_3to1, usevar<span class="op">=</span><span class="st">'unequal'</span>)</span>
-<span id="cb10-54"><a href="#cb10-54" aria-hidden="true" tabindex="-1"></a>model_ratio <span class="op">=</span> smf.ols(<span class="st">"gave ~ ratio + ratio2 + ratio3"</span>, data<span class="op">=</span>df).fit()</span>
-<span id="cb10-55"><a href="#cb10-55" aria-hidden="true" tabindex="-1"></a>short_summary(model_ratio, label<span class="op">=</span><span class="st">"OLS for gave on ratio dummies"</span>)</span>
-<span id="cb10-56"><a href="#cb10-56" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Response rate difference, 1:1 vs 2:1 ="</span>, (gave_2to1.mean() <span class="op">-</span> gave_1to1.mean())<span class="op">*</span><span class="dv">100</span>)</span>
-<span id="cb10-57"><a href="#cb10-57" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Response rate difference, 2:1 vs 3:1 ="</span>, (gave_3to1.mean() <span class="op">-</span> gave_2to1.mean())<span class="op">*</span><span class="dv">100</span>)</span>
-<span id="cb10-58"><a href="#cb10-58" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-59"><a href="#cb10-59" aria-hidden="true" tabindex="-1"></a><span class="co"># Donation Amounts</span></span>
-<span id="cb10-60"><a href="#cb10-60" aria-hidden="true" tabindex="-1"></a>amt_treat <span class="op">=</span> df_treat[<span class="st">'amount'</span>].fillna(<span class="dv">0</span>)</span>
-<span id="cb10-61"><a href="#cb10-61" aria-hidden="true" tabindex="-1"></a>amt_cont <span class="op">=</span> df_cont[<span class="st">'amount'</span>].fillna(<span class="dv">0</span>)</span>
-<span id="cb10-62"><a href="#cb10-62" aria-hidden="true" tabindex="-1"></a>t_amt, p_amt, df_amt_ <span class="op">=</span> ttest_ind(amt_treat, amt_cont, usevar<span class="op">=</span><span class="st">'unequal'</span>)</span>
-<span id="cb10-63"><a href="#cb10-63" aria-hidden="true" tabindex="-1"></a>model_amt_ols <span class="op">=</span> smf.ols(<span class="st">"amount ~ treatment"</span>, data<span class="op">=</span>df).fit()</span>
-<span id="cb10-64"><a href="#cb10-64" aria-hidden="true" tabindex="-1"></a>short_summary(model_amt_ols, label<span class="op">=</span><span class="st">"OLS for unconditional 'amount'"</span>)</span>
-<span id="cb10-65"><a href="#cb10-65" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-66"><a href="#cb10-66" aria-hidden="true" tabindex="-1"></a>df_givers <span class="op">=</span> df[df[<span class="st">'gave'</span>] <span class="op">==</span> <span class="dv">1</span>]</span>
-<span id="cb10-67"><a href="#cb10-67" aria-hidden="true" tabindex="-1"></a>amt_treat_g <span class="op">=</span> df_givers[df_givers[<span class="st">'treatment'</span>]<span class="op">==</span><span class="dv">1</span>][<span class="st">'amount'</span>]</span>
-<span id="cb10-68"><a href="#cb10-68" aria-hidden="true" tabindex="-1"></a>amt_cont_g <span class="op">=</span> df_givers[df_givers[<span class="st">'control'</span>]<span class="op">==</span><span class="dv">1</span>][<span class="st">'amount'</span>]</span>
-<span id="cb10-69"><a href="#cb10-69" aria-hidden="true" tabindex="-1"></a>t_amt_g, p_amt_g, df_amt_g <span class="op">=</span> ttest_ind(amt_treat_g, amt_cont_g, usevar<span class="op">=</span><span class="st">'unequal'</span>)</span>
-<span id="cb10-70"><a href="#cb10-70" aria-hidden="true" tabindex="-1"></a>model_amt_cond_ols <span class="op">=</span> smf.ols(<span class="st">"amount ~ treatment"</span>, data<span class="op">=</span>df_givers).fit()</span>
-<span id="cb10-71"><a href="#cb10-71" aria-hidden="true" tabindex="-1"></a>short_summary(model_amt_cond_ols, label<span class="op">=</span><span class="st">"OLS for amount among donors"</span>)</span>
-<span id="cb10-72"><a href="#cb10-72" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-73"><a href="#cb10-73" aria-hidden="true" tabindex="-1"></a><span class="co"># LLN Simulation</span></span>
-<span id="cb10-74"><a href="#cb10-74" aria-hidden="true" tabindex="-1"></a>N_sims <span class="op">=</span> <span class="dv">10000</span></span>
-<span id="cb10-75"><a href="#cb10-75" aria-hidden="true" tabindex="-1"></a>p_c <span class="op">=</span> <span class="fl">0.018</span></span>
-<span id="cb10-76"><a href="#cb10-76" aria-hidden="true" tabindex="-1"></a>p_t <span class="op">=</span> <span class="fl">0.022</span></span>
-<span id="cb10-77"><a href="#cb10-77" aria-hidden="true" tabindex="-1"></a>sim_c <span class="op">=</span> np.random.binomial(<span class="dv">1</span>, p_c, size<span class="op">=</span>N_sims)</span>
-<span id="cb10-78"><a href="#cb10-78" aria-hidden="true" tabindex="-1"></a>sim_t <span class="op">=</span> np.random.binomial(<span class="dv">1</span>, p_t, size<span class="op">=</span>N_sims)</span>
-<span id="cb10-79"><a href="#cb10-79" aria-hidden="true" tabindex="-1"></a>diff_vec <span class="op">=</span> sim_t <span class="op">-</span> sim_c</span>
-<span id="cb10-80"><a href="#cb10-80" aria-hidden="true" tabindex="-1"></a>cum_avg <span class="op">=</span> np.cumsum(diff_vec) <span class="op">/</span> np.arange(<span class="dv">1</span>, N_sims<span class="op">+</span><span class="dv">1</span>)</span>
-<span id="cb10-81"><a href="#cb10-81" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-82"><a href="#cb10-82" aria-hidden="true" tabindex="-1"></a><span class="co"># CLT Simulation</span></span>
-<span id="cb10-83"><a href="#cb10-83" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> draw_mean_diffs(n_control, n_treatment, iters<span class="op">=</span><span class="dv">1000</span>):</span>
-<span id="cb10-84"><a href="#cb10-84" aria-hidden="true" tabindex="-1"></a>    out <span class="op">=</span> []</span>
-<span id="cb10-85"><a href="#cb10-85" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> _ <span class="kw">in</span> <span class="bu">range</span>(iters):</span>
-<span id="cb10-86"><a href="#cb10-86" aria-hidden="true" tabindex="-1"></a>        c_draws <span class="op">=</span> np.random.binomial(<span class="dv">1</span>, p_c, size<span class="op">=</span>n_control)</span>
-<span id="cb10-87"><a href="#cb10-87" aria-hidden="true" tabindex="-1"></a>        t_draws <span class="op">=</span> np.random.binomial(<span class="dv">1</span>, p_t, size<span class="op">=</span>n_treatment)</span>
-<span id="cb10-88"><a href="#cb10-88" aria-hidden="true" tabindex="-1"></a>        out.append(t_draws.mean() <span class="op">-</span> c_draws.mean())</span>
-<span id="cb10-89"><a href="#cb10-89" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> np.array(out)</span>
-<span id="cb10-90"><a href="#cb10-90" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-91"><a href="#cb10-91" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> s <span class="kw">in</span> [<span class="dv">50</span>, <span class="dv">200</span>, <span class="dv">500</span>, <span class="dv">1000</span>]:</span>
-<span id="cb10-92"><a href="#cb10-92" aria-hidden="true" tabindex="-1"></a>    diffs <span class="op">=</span> draw_mean_diffs(s, s)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="co"># A Replication of Karlan and List (2007)</span></span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> statsmodels.api <span class="im">as</span> sm</span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> statsmodels.formula.api <span class="im">as</span> smf</span>
+<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> statsmodels.stats.weightstats <span class="im">import</span> ttest_ind</span>
+<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-9"><a href="#cb16-9" aria-hidden="true" tabindex="-1"></a>plt.rcParams[<span class="st">'axes.prop_cycle'</span>] <span class="op">=</span> plt.cycler(color<span class="op">=</span>[<span class="st">"#2ca02c"</span>,<span class="st">"#ff7f0e"</span>,<span class="st">"#9467bd"</span>,<span class="st">"#d62728"</span>])</span>
+<span id="cb16-10"><a href="#cb16-10" aria-hidden="true" tabindex="-1"></a>plt.rcParams[<span class="st">'figure.figsize'</span>] <span class="op">=</span> (<span class="dv">7</span>,<span class="dv">5</span>)</span>
+<span id="cb16-11"><a href="#cb16-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-12"><a href="#cb16-12" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> short_summary(model, label<span class="op">=</span><span class="va">None</span>):</span>
+<span id="cb16-13"><a href="#cb16-13" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> label:</span>
+<span id="cb16-14"><a href="#cb16-14" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(<span class="ss">f"=== </span><span class="sc">{</span>label<span class="sc">}</span><span class="ss"> ==="</span>)</span>
+<span id="cb16-15"><a href="#cb16-15" aria-hidden="true" tabindex="-1"></a>    df_summary <span class="op">=</span> pd.DataFrame({</span>
+<span id="cb16-16"><a href="#cb16-16" aria-hidden="true" tabindex="-1"></a>        <span class="st">'coef'</span>: model.params,</span>
+<span id="cb16-17"><a href="#cb16-17" aria-hidden="true" tabindex="-1"></a>        <span class="st">'std err'</span>: model.bse,</span>
+<span id="cb16-18"><a href="#cb16-18" aria-hidden="true" tabindex="-1"></a>        <span class="st">'t'</span>: model.tvalues,</span>
+<span id="cb16-19"><a href="#cb16-19" aria-hidden="true" tabindex="-1"></a>        <span class="st">'P&gt;|t|'</span>: model.pvalues</span>
+<span id="cb16-20"><a href="#cb16-20" aria-hidden="true" tabindex="-1"></a>    })</span>
+<span id="cb16-21"><a href="#cb16-21" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(df_summary)</span>
+<span id="cb16-22"><a href="#cb16-22" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>()</span>
+<span id="cb16-23"><a href="#cb16-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-24"><a href="#cb16-24" aria-hidden="true" tabindex="-1"></a>data_filepath <span class="op">=</span> <span class="st">"karlan_list_2007.dta"</span></span>
+<span id="cb16-25"><a href="#cb16-25" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> pd.read_stata(data_filepath)</span>
+<span id="cb16-26"><a href="#cb16-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-27"><a href="#cb16-27" aria-hidden="true" tabindex="-1"></a><span class="co"># Balance Test</span></span>
+<span id="cb16-28"><a href="#cb16-28" aria-hidden="true" tabindex="-1"></a>df_treat <span class="op">=</span> df[df[<span class="st">'treatment'</span>] <span class="op">==</span> <span class="dv">1</span>]</span>
+<span id="cb16-29"><a href="#cb16-29" aria-hidden="true" tabindex="-1"></a>df_cont <span class="op">=</span> df[df[<span class="st">'control'</span>] <span class="op">==</span> <span class="dv">1</span>]</span>
+<span id="cb16-30"><a href="#cb16-30" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-31"><a href="#cb16-31" aria-hidden="true" tabindex="-1"></a>mrm2_treat <span class="op">=</span> df_treat[<span class="st">'mrm2'</span>].dropna()</span>
+<span id="cb16-32"><a href="#cb16-32" aria-hidden="true" tabindex="-1"></a>mrm2_cont <span class="op">=</span> df_cont[<span class="st">'mrm2'</span>].dropna()</span>
+<span id="cb16-33"><a href="#cb16-33" aria-hidden="true" tabindex="-1"></a>t_stat, p_val, df_deg <span class="op">=</span> ttest_ind(mrm2_treat, mrm2_cont, usevar<span class="op">=</span><span class="st">'unequal'</span>)</span>
+<span id="cb16-34"><a href="#cb16-34" aria-hidden="true" tabindex="-1"></a>model_bal <span class="op">=</span> smf.ols(<span class="st">"mrm2 ~ treatment"</span>, data<span class="op">=</span>df).fit()</span>
+<span id="cb16-35"><a href="#cb16-35" aria-hidden="true" tabindex="-1"></a>short_summary(model_bal, label<span class="op">=</span><span class="st">"OLS for mrm2 on treatment"</span>)</span>
+<span id="cb16-36"><a href="#cb16-36" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-37"><a href="#cb16-37" aria-hidden="true" tabindex="-1"></a><span class="co"># Charitable Contributions</span></span>
+<span id="cb16-38"><a href="#cb16-38" aria-hidden="true" tabindex="-1"></a>gave_treat_mean <span class="op">=</span> df_treat[<span class="st">'gave'</span>].mean()</span>
+<span id="cb16-39"><a href="#cb16-39" aria-hidden="true" tabindex="-1"></a>gave_cont_mean <span class="op">=</span> df_cont[<span class="st">'gave'</span>].mean()</span>
+<span id="cb16-40"><a href="#cb16-40" aria-hidden="true" tabindex="-1"></a>plt.bar([<span class="st">"Control"</span>, <span class="st">"Treatment"</span>], [gave_cont_mean, gave_treat_mean], color<span class="op">=</span>[<span class="st">"#1f77b4"</span>,<span class="st">"#ff7f0e"</span>])</span>
+<span id="cb16-41"><a href="#cb16-41" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">"Proportion Who Donated: Control vs Treatment"</span>)</span>
+<span id="cb16-42"><a href="#cb16-42" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">"Proportion"</span>)</span>
+<span id="cb16-43"><a href="#cb16-43" aria-hidden="true" tabindex="-1"></a>plt.show()</span>
+<span id="cb16-44"><a href="#cb16-44" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-45"><a href="#cb16-45" aria-hidden="true" tabindex="-1"></a>gave_treat_vals <span class="op">=</span> df_treat[<span class="st">'gave'</span>]</span>
+<span id="cb16-46"><a href="#cb16-46" aria-hidden="true" tabindex="-1"></a>gave_cont_vals <span class="op">=</span> df_cont[<span class="st">'gave'</span>]</span>
+<span id="cb16-47"><a href="#cb16-47" aria-hidden="true" tabindex="-1"></a>t_gave, p_gave, df_g <span class="op">=</span> ttest_ind(gave_treat_vals, gave_cont_vals, usevar<span class="op">=</span><span class="st">'unequal'</span>)</span>
+<span id="cb16-48"><a href="#cb16-48" aria-hidden="true" tabindex="-1"></a>model_gave_ols <span class="op">=</span> smf.ols(<span class="st">"gave ~ treatment"</span>, data<span class="op">=</span>df).fit()</span>
+<span id="cb16-49"><a href="#cb16-49" aria-hidden="true" tabindex="-1"></a>short_summary(model_gave_ols, label<span class="op">=</span><span class="st">"OLS for gave on treatment"</span>)</span>
+<span id="cb16-50"><a href="#cb16-50" aria-hidden="true" tabindex="-1"></a>model_gave_probit <span class="op">=</span> smf.probit(<span class="st">"gave ~ treatment"</span>, data<span class="op">=</span>df).fit(disp<span class="op">=</span><span class="va">False</span>)</span>
+<span id="cb16-51"><a href="#cb16-51" aria-hidden="true" tabindex="-1"></a>short_summary(model_gave_probit, label<span class="op">=</span><span class="st">"Probit for gave on treatment"</span>)</span>
+<span id="cb16-52"><a href="#cb16-52" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-53"><a href="#cb16-53" aria-hidden="true" tabindex="-1"></a><span class="co"># Match Ratios</span></span>
+<span id="cb16-54"><a href="#cb16-54" aria-hidden="true" tabindex="-1"></a>gave_1to1 <span class="op">=</span> df[df[<span class="st">'ratio'</span>] <span class="op">==</span> <span class="dv">1</span>][<span class="st">'gave'</span>]</span>
+<span id="cb16-55"><a href="#cb16-55" aria-hidden="true" tabindex="-1"></a>gave_2to1 <span class="op">=</span> df[df[<span class="st">'ratio2'</span>] <span class="op">==</span> <span class="dv">1</span>][<span class="st">'gave'</span>]</span>
+<span id="cb16-56"><a href="#cb16-56" aria-hidden="true" tabindex="-1"></a>gave_3to1 <span class="op">=</span> df[df[<span class="st">'ratio3'</span>] <span class="op">==</span> <span class="dv">1</span>][<span class="st">'gave'</span>]</span>
+<span id="cb16-57"><a href="#cb16-57" aria-hidden="true" tabindex="-1"></a>t_12, p_12, df_12 <span class="op">=</span> ttest_ind(gave_1to1, gave_2to1, usevar<span class="op">=</span><span class="st">'unequal'</span>)</span>
+<span id="cb16-58"><a href="#cb16-58" aria-hidden="true" tabindex="-1"></a>t_23, p_23, df_23 <span class="op">=</span> ttest_ind(gave_2to1, gave_3to1, usevar<span class="op">=</span><span class="st">'unequal'</span>)</span>
+<span id="cb16-59"><a href="#cb16-59" aria-hidden="true" tabindex="-1"></a>model_ratio <span class="op">=</span> smf.ols(<span class="st">"gave ~ ratio + ratio2 + ratio3"</span>, data<span class="op">=</span>df).fit()</span>
+<span id="cb16-60"><a href="#cb16-60" aria-hidden="true" tabindex="-1"></a>short_summary(model_ratio, label<span class="op">=</span><span class="st">"OLS for gave on ratio dummies"</span>)</span>
+<span id="cb16-61"><a href="#cb16-61" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Response rate difference, 1:1 vs 2:1 ="</span>, (gave_2to1.mean() <span class="op">-</span> gave_1to1.mean())<span class="op">*</span><span class="dv">100</span>)</span>
+<span id="cb16-62"><a href="#cb16-62" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Response rate difference, 2:1 vs 3:1 ="</span>, (gave_3to1.mean() <span class="op">-</span> gave_2to1.mean())<span class="op">*</span><span class="dv">100</span>)</span>
+<span id="cb16-63"><a href="#cb16-63" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-64"><a href="#cb16-64" aria-hidden="true" tabindex="-1"></a><span class="co"># Donation Amounts</span></span>
+<span id="cb16-65"><a href="#cb16-65" aria-hidden="true" tabindex="-1"></a>amt_treat <span class="op">=</span> df_treat[<span class="st">'amount'</span>].fillna(<span class="dv">0</span>)</span>
+<span id="cb16-66"><a href="#cb16-66" aria-hidden="true" tabindex="-1"></a>amt_cont <span class="op">=</span> df_cont[<span class="st">'amount'</span>].fillna(<span class="dv">0</span>)</span>
+<span id="cb16-67"><a href="#cb16-67" aria-hidden="true" tabindex="-1"></a>t_amt, p_amt, df_amt_ <span class="op">=</span> ttest_ind(amt_treat, amt_cont, usevar<span class="op">=</span><span class="st">'unequal'</span>)</span>
+<span id="cb16-68"><a href="#cb16-68" aria-hidden="true" tabindex="-1"></a>model_amt_ols <span class="op">=</span> smf.ols(<span class="st">"amount ~ treatment"</span>, data<span class="op">=</span>df).fit()</span>
+<span id="cb16-69"><a href="#cb16-69" aria-hidden="true" tabindex="-1"></a>short_summary(model_amt_ols, label<span class="op">=</span><span class="st">"OLS for unconditional 'amount'"</span>)</span>
+<span id="cb16-70"><a href="#cb16-70" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-71"><a href="#cb16-71" aria-hidden="true" tabindex="-1"></a>df_givers <span class="op">=</span> df[df[<span class="st">'gave'</span>] <span class="op">==</span> <span class="dv">1</span>]</span>
+<span id="cb16-72"><a href="#cb16-72" aria-hidden="true" tabindex="-1"></a>amt_treat_g <span class="op">=</span> df_givers[df_givers[<span class="st">'treatment'</span>]<span class="op">==</span><span class="dv">1</span>][<span class="st">'amount'</span>]</span>
+<span id="cb16-73"><a href="#cb16-73" aria-hidden="true" tabindex="-1"></a>amt_cont_g <span class="op">=</span> df_givers[df_givers[<span class="st">'control'</span>]<span class="op">==</span><span class="dv">1</span>][<span class="st">'amount'</span>]</span>
+<span id="cb16-74"><a href="#cb16-74" aria-hidden="true" tabindex="-1"></a>t_amt_g, p_amt_g, df_amt_g <span class="op">=</span> ttest_ind(amt_treat_g, amt_cont_g, usevar<span class="op">=</span><span class="st">'unequal'</span>)</span>
+<span id="cb16-75"><a href="#cb16-75" aria-hidden="true" tabindex="-1"></a>model_amt_cond_ols <span class="op">=</span> smf.ols(<span class="st">"amount ~ treatment"</span>, data<span class="op">=</span>df_givers).fit()</span>
+<span id="cb16-76"><a href="#cb16-76" aria-hidden="true" tabindex="-1"></a>short_summary(model_amt_cond_ols, label<span class="op">=</span><span class="st">"OLS for amount among donors"</span>)</span>
+<span id="cb16-77"><a href="#cb16-77" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-78"><a href="#cb16-78" aria-hidden="true" tabindex="-1"></a><span class="co"># Histograms</span></span>
+<span id="cb16-79"><a href="#cb16-79" aria-hidden="true" tabindex="-1"></a>mean_treat_g <span class="op">=</span> amt_treat_g.mean()</span>
+<span id="cb16-80"><a href="#cb16-80" aria-hidden="true" tabindex="-1"></a>mean_cont_g <span class="op">=</span> amt_cont_g.mean()</span>
+<span id="cb16-81"><a href="#cb16-81" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-82"><a href="#cb16-82" aria-hidden="true" tabindex="-1"></a>plt.hist(amt_treat_g, bins<span class="op">=</span><span class="dv">30</span>, color<span class="op">=</span><span class="st">"#9467bd"</span>)</span>
+<span id="cb16-83"><a href="#cb16-83" aria-hidden="true" tabindex="-1"></a>plt.axvline(mean_treat_g, color<span class="op">=</span><span class="st">'red'</span>, linestyle<span class="op">=</span><span class="st">'--'</span>, linewidth<span class="op">=</span><span class="dv">2</span>)</span>
+<span id="cb16-84"><a href="#cb16-84" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">"Histogram: Donation Amounts (Treatment donors)"</span>)</span>
+<span id="cb16-85"><a href="#cb16-85" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">"Donation Amount"</span>)</span>
+<span id="cb16-86"><a href="#cb16-86" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">"Frequency"</span>)</span>
+<span id="cb16-87"><a href="#cb16-87" aria-hidden="true" tabindex="-1"></a>plt.show()</span>
+<span id="cb16-88"><a href="#cb16-88" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-89"><a href="#cb16-89" aria-hidden="true" tabindex="-1"></a>plt.hist(amt_cont_g, bins<span class="op">=</span><span class="dv">30</span>, color<span class="op">=</span><span class="st">"#d62728"</span>)</span>
+<span id="cb16-90"><a href="#cb16-90" aria-hidden="true" tabindex="-1"></a>plt.axvline(mean_cont_g, color<span class="op">=</span><span class="st">'red'</span>, linestyle<span class="op">=</span><span class="st">'--'</span>, linewidth<span class="op">=</span><span class="dv">2</span>)</span>
+<span id="cb16-91"><a href="#cb16-91" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">"Histogram: Donation Amounts (Control donors)"</span>)</span>
+<span id="cb16-92"><a href="#cb16-92" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">"Donation Amount"</span>)</span>
+<span id="cb16-93"><a href="#cb16-93" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">"Frequency"</span>)</span>
+<span id="cb16-94"><a href="#cb16-94" aria-hidden="true" tabindex="-1"></a>plt.show()</span>
+<span id="cb16-95"><a href="#cb16-95" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-96"><a href="#cb16-96" aria-hidden="true" tabindex="-1"></a><span class="co"># LLN Simulation</span></span>
+<span id="cb16-97"><a href="#cb16-97" aria-hidden="true" tabindex="-1"></a>N_sims <span class="op">=</span> <span class="dv">10000</span></span>
+<span id="cb16-98"><a href="#cb16-98" aria-hidden="true" tabindex="-1"></a>p_c <span class="op">=</span> <span class="fl">0.018</span></span>
+<span id="cb16-99"><a href="#cb16-99" aria-hidden="true" tabindex="-1"></a>p_t <span class="op">=</span> <span class="fl">0.022</span></span>
+<span id="cb16-100"><a href="#cb16-100" aria-hidden="true" tabindex="-1"></a>sim_c <span class="op">=</span> np.random.binomial(<span class="dv">1</span>, p_c, size<span class="op">=</span>N_sims)</span>
+<span id="cb16-101"><a href="#cb16-101" aria-hidden="true" tabindex="-1"></a>sim_t <span class="op">=</span> np.random.binomial(<span class="dv">1</span>, p_t, size<span class="op">=</span>N_sims)</span>
+<span id="cb16-102"><a href="#cb16-102" aria-hidden="true" tabindex="-1"></a>diff_vec <span class="op">=</span> sim_t <span class="op">-</span> sim_c</span>
+<span id="cb16-103"><a href="#cb16-103" aria-hidden="true" tabindex="-1"></a>cum_avg <span class="op">=</span> np.cumsum(diff_vec) <span class="op">/</span> np.arange(<span class="dv">1</span>, N_sims<span class="op">+</span><span class="dv">1</span>)</span>
+<span id="cb16-104"><a href="#cb16-104" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-105"><a href="#cb16-105" aria-hidden="true" tabindex="-1"></a>plt.plot(cum_avg, color<span class="op">=</span><span class="st">"#2ca02c"</span>)</span>
+<span id="cb16-106"><a href="#cb16-106" aria-hidden="true" tabindex="-1"></a>plt.axhline(y<span class="op">=</span>(p_t <span class="op">-</span> p_c), color<span class="op">=</span><span class="st">'red'</span>, linestyle<span class="op">=</span><span class="st">'--'</span>)</span>
+<span id="cb16-107"><a href="#cb16-107" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">"Cumulative Average of Differences (Treatment - Control)"</span>)</span>
+<span id="cb16-108"><a href="#cb16-108" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">"Number of draws"</span>)</span>
+<span id="cb16-109"><a href="#cb16-109" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">"Cumulative average difference"</span>)</span>
+<span id="cb16-110"><a href="#cb16-110" aria-hidden="true" tabindex="-1"></a>plt.show()</span>
+<span id="cb16-111"><a href="#cb16-111" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-112"><a href="#cb16-112" aria-hidden="true" tabindex="-1"></a><span class="co"># CLT Simulation</span></span>
+<span id="cb16-113"><a href="#cb16-113" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> draw_mean_diffs(n_control, n_treatment, iters<span class="op">=</span><span class="dv">1000</span>):</span>
+<span id="cb16-114"><a href="#cb16-114" aria-hidden="true" tabindex="-1"></a>    out <span class="op">=</span> []</span>
+<span id="cb16-115"><a href="#cb16-115" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> _ <span class="kw">in</span> <span class="bu">range</span>(iters):</span>
+<span id="cb16-116"><a href="#cb16-116" aria-hidden="true" tabindex="-1"></a>        c_draws <span class="op">=</span> np.random.binomial(<span class="dv">1</span>, p_c, size<span class="op">=</span>n_control)</span>
+<span id="cb16-117"><a href="#cb16-117" aria-hidden="true" tabindex="-1"></a>        t_draws <span class="op">=</span> np.random.binomial(<span class="dv">1</span>, p_t, size<span class="op">=</span>n_treatment)</span>
+<span id="cb16-118"><a href="#cb16-118" aria-hidden="true" tabindex="-1"></a>        out.append(t_draws.mean() <span class="op">-</span> c_draws.mean())</span>
+<span id="cb16-119"><a href="#cb16-119" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> np.array(out)</span>
+<span id="cb16-120"><a href="#cb16-120" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-121"><a href="#cb16-121" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> s <span class="kw">in</span> [<span class="dv">50</span>, <span class="dv">200</span>, <span class="dv">500</span>, <span class="dv">1000</span>]:</span>
+<span id="cb16-122"><a href="#cb16-122" aria-hidden="true" tabindex="-1"></a>    diffs_s <span class="op">=</span> draw_mean_diffs(s, s)</span>
+<span id="cb16-123"><a href="#cb16-123" aria-hidden="true" tabindex="-1"></a>    plt.hist(diffs_s, bins<span class="op">=</span><span class="dv">30</span>, color<span class="op">=</span><span class="st">"#ff7f0e"</span>, alpha<span class="op">=</span><span class="fl">0.8</span>)</span>
+<span id="cb16-124"><a href="#cb16-124" aria-hidden="true" tabindex="-1"></a>    plt.axvline(<span class="dv">0</span>, color<span class="op">=</span><span class="st">'black'</span>, linestyle<span class="op">=</span><span class="st">'--'</span>)</span>
+<span id="cb16-125"><a href="#cb16-125" aria-hidden="true" tabindex="-1"></a>    plt.title(<span class="ss">f"Histogram of Differences (n=</span><span class="sc">{</span>s<span class="sc">}</span><span class="ss">, 1000 reps)"</span>)</span>
+<span id="cb16-126"><a href="#cb16-126" aria-hidden="true" tabindex="-1"></a>    plt.xlabel(<span class="st">"Difference in means (treat - control)"</span>)</span>
+<span id="cb16-127"><a href="#cb16-127" aria-hidden="true" tabindex="-1"></a>    plt.ylabel(<span class="st">"Frequency"</span>)</span>
+<span id="cb16-128"><a href="#cb16-128" aria-hidden="true" tabindex="-1"></a>    plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
 
