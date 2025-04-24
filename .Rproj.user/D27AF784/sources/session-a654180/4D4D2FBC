@@ -3,7 +3,7 @@
     "path": "~/Downloads/quarto_website/blog/HW1/index.qmd",
     "project_path": "blog/HW1/index.qmd",
     "type": "quarto_markdown",
-    "hash": "999909835",
+    "hash": "565527390",
     "contents": "",
     "dirty": false,
     "created": 1745467931098.0,
@@ -12,15 +12,15 @@
     "properties": {
         "source_window_id": "",
         "Source": "Source",
-        "cursorPosition": "6,19",
+        "cursorPosition": "7,34",
         "scrollLine": "0"
     },
     "folds": "",
-    "lastKnownWriteTime": 1745468797,
+    "lastKnownWriteTime": 1745476810,
     "encoding": "UTF-8",
     "collab_server": "",
     "source_window": "",
-    "last_content_update": 1745468797358,
+    "last_content_update": 1745476810819,
     "read_only": false,
     "read_only_alternatives": []
 }
