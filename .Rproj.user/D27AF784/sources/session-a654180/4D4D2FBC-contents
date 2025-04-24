@@ -10,7 +10,7 @@ format:
     toc-depth: 2
 execute: 
   echo: true
-  eval: true 
+  eval: false 
   freeze: true
 ---
 
@@ -26,7 +26,7 @@ Dean Karlan and John List (2007) carried out a natural field experiment to inves
 
 ```{python}
 #| echo: true
-#| eval: true 
+#| eval: false 
 
 import numpy as np
 import pandas as pd
@@ -60,7 +60,7 @@ df_cont  = df[df['control'] == 1]
 
 ```{python}
 #| echo: true
-#| eval: true 
+#| eval: false 
 
 print("Columns:\n", df.columns.tolist())
 print("\nSummary statistics:\n", df.describe())
@@ -131,7 +131,7 @@ print("\nSummary statistics:\n", df.describe())
 
 ```{python}
 #| echo: true
-#| eval: true 
+#| eval: false 
 
 mrm2_treat = df_treat['mrm2'].dropna()
 mrm2_cont  = df_cont['mrm2'].dropna()
@@ -153,7 +153,7 @@ short_summary(model_bal, label="OLS for mrm2 on treatment")
 
 ```{python}
 #| echo: true
-#| eval: true 
+#| eval: false 
 
 gave_treat_mean = df_treat['gave'].mean()
 gave_cont_mean  = df_cont['gave'].mean()
@@ -166,7 +166,7 @@ print("Proportion gave - Control:", gave_cont_mean, "Treatment:", gave_treat_mea
 
 ```{python}
 #| echo: true
-#| eval: true 
+#| eval: false 
 
 gave_treat_vals = df_treat['gave']
 gave_cont_vals  = df_cont['gave']
@@ -186,7 +186,7 @@ short_summary(model_gave_probit, label="Probit for gave")
 
 ```{python}
 #| echo: true
-#| eval: true 
+#| eval: false 
 
 gave_1to1 = df[df['ratio'] == 1]['gave']
 gave_2to1 = df[df['ratio2'] == 1]['gave']
@@ -215,7 +215,7 @@ print("Diff(2:1 vs 3:1):", r_3 - r_2)
 
 ```{python}
 #| echo: true
-#| eval: true 
+#| eval: false 
 
 amt_treat = df_treat['amount'].fillna(0)
 amt_cont  = df_cont['amount'].fillna(0)
@@ -251,7 +251,7 @@ short_summary(model_amt_cond_ols, label="OLS for amount among donors")
 
 ```{python}
 #| echo: true
-#| eval: true 
+#| eval: false 
 
 N_sims = 10000
 p_c = 0.018
@@ -271,7 +271,7 @@ cum_avg = np.cumsum(diff_vec)/np.arange(1,N_sims+1)
 
 ```{python}
 #| echo: true
-#| eval: true 
+#| eval: false 
 
 def draw_mean_diffs(n_control, n_treatment, iters=1000):
     out = []
@@ -300,7 +300,7 @@ The results replicate those of Karlan and List (2007): matching grants increase 
 
 ```{python}
 #| echo: true
-#| eval: true 
+#| eval: false 
 
 # A Replication of Karlan and List (2007) - Python Version
 import numpy as np
@@ -395,5 +395,6 @@ def draw_mean_diffs(n_control, n_treatment, iters=1000):
 for s in [50, 200, 500, 1000]:
     diffs = draw_mean_diffs(s, s)
 ```
+
 
 

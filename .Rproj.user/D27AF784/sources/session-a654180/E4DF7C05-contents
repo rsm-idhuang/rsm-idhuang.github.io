@@ -10,7 +10,7 @@ format:
     toc-depth: 2
 execute: 
   echo: true
-  eval: true 
+  eval: false 
   freeze: true
 ---
 
@@ -26,7 +26,7 @@ Dean Karlan and John List (2007) carried out a natural field experiment to inves
 
 ```{python}
 #| echo: true
-#| eval: true 
+#| eval: false 
 
 import numpy as np
 import pandas as pd
@@ -60,7 +60,7 @@ df_cont  = df[df['control'] == 1]
 
 ```{python}
 #| echo: true
-#| eval: true 
+#| eval: false 
 
 print("Columns:\n", df.columns.tolist())
 print("\nSummary statistics:\n", df.describe())
@@ -131,7 +131,7 @@ print("\nSummary statistics:\n", df.describe())
 
 ```{python}
 #| echo: true
-#| eval: true 
+#| eval: false 
 
 mrm2_treat = df_treat['mrm2'].dropna()
 mrm2_cont  = df_cont['mrm2'].dropna()
@@ -153,7 +153,7 @@ short_summary(model_bal, label="OLS for mrm2 on treatment")
 
 ```{python}
 #| echo: true
-#| eval: true 
+#| eval: false 
 
 gave_treat_mean = df_treat['gave'].mean()
 gave_cont_mean  = df_cont['gave'].mean()
@@ -166,7 +166,7 @@ print("Proportion gave - Control:", gave_cont_mean, "Treatment:", gave_treat_mea
 
 ```{python}
 #| echo: true
-#| eval: true 
+#| eval: false 
 
 gave_treat_vals = df_treat['gave']
 gave_cont_vals  = df_cont['gave']
@@ -186,7 +186,7 @@ short_summary(model_gave_probit, label="Probit for gave")
 
 ```{python}
 #| echo: true
-#| eval: true 
+#| eval: false 
 
 gave_1to1 = df[df['ratio'] == 1]['gave']
 gave_2to1 = df[df['ratio2'] == 1]['gave']
@@ -215,7 +215,7 @@ print("Diff(2:1 vs 3:1):", r_3 - r_2)
 
 ```{python}
 #| echo: true
-#| eval: true 
+#| eval: false 
 
 amt_treat = df_treat['amount'].fillna(0)
 amt_cont  = df_cont['amount'].fillna(0)
@@ -251,7 +251,7 @@ short_summary(model_amt_cond_ols, label="OLS for amount among donors")
 
 ```{python}
 #| echo: true
-#| eval: true 
+#| eval: false 
 
 N_sims = 10000
 p_c = 0.018
@@ -271,7 +271,7 @@ cum_avg = np.cumsum(diff_vec)/np.arange(1,N_sims+1)
 
 ```{python}
 #| echo: true
-#| eval: true 
+#| eval: false 
 
 def draw_mean_diffs(n_control, n_treatment, iters=1000):
     out = []
@@ -295,3 +295,106 @@ for s in [50, 200, 500, 1000]:
 ## Conclusion
 
 The results replicate those of Karlan and List (2007): matching grants increase donation rates, but higher match ratios do not improve outcomes further. The average donation amount is unaffected. Simulations illustrate the LLN and CLT in practice.
+
+## Full Code
+
+```{python}
+#| echo: true
+#| eval: false 
+
+# A Replication of Karlan and List (2007) - Python Version
+import numpy as np
+import pandas as pd
+import statsmodels.api as sm
+import statsmodels.formula.api as smf
+from statsmodels.stats.weightstats import ttest_ind
+import matplotlib.pyplot as plt
+
+plt.rcParams['axes.prop_cycle'] = plt.cycler(color=["#2ca02c","#ff7f0e","#9467bd","#d62728"])
+plt.rcParams['figure.figsize'] = (7,5)
+
+def short_summary(model, label=None):
+    if label:
+        print(f"=== {label} ===")
+    df_summary = pd.DataFrame({
+        'coef': model.params,
+        'std err': model.bse,
+        't': model.tvalues,
+        'P>|t|': model.pvalues
+    })
+    print(df_summary)
+    print()
+
+data_filepath = "karlan_list_2007.dta"
+df = pd.read_stata(data_filepath)
+
+# Balance Test
+df_treat = df[df['treatment'] == 1]
+df_cont = df[df['control'] == 1]
+
+mrm2_treat = df_treat['mrm2'].dropna()
+mrm2_cont = df_cont['mrm2'].dropna()
+t_stat, p_val, df_deg = ttest_ind(mrm2_treat, mrm2_cont, usevar='unequal')
+model_bal = smf.ols("mrm2 ~ treatment", data=df).fit()
+short_summary(model_bal, label="OLS for mrm2 on treatment")
+
+# Charitable Contributions
+gave_treat_mean = df_treat['gave'].mean()
+gave_cont_mean = df_cont['gave'].mean()
+gave_treat_vals = df_treat['gave']
+gave_cont_vals = df_cont['gave']
+t_gave, p_gave, df_g = ttest_ind(gave_treat_vals, gave_cont_vals, usevar='unequal')
+model_gave_ols = smf.ols("gave ~ treatment", data=df).fit()
+short_summary(model_gave_ols, label="OLS for gave on treatment")
+model_gave_probit = smf.probit("gave ~ treatment", data=df).fit(disp=False)
+short_summary(model_gave_probit, label="Probit for gave on treatment")
+
+# Match Ratios
+gave_1to1 = df[df['ratio'] == 1]['gave']
+gave_2to1 = df[df['ratio2'] == 1]['gave']
+gave_3to1 = df[df['ratio3'] == 1]['gave']
+t_12, p_12, df_12 = ttest_ind(gave_1to1, gave_2to1, usevar='unequal')
+t_23, p_23, df_23 = ttest_ind(gave_2to1, gave_3to1, usevar='unequal')
+model_ratio = smf.ols("gave ~ ratio + ratio2 + ratio3", data=df).fit()
+short_summary(model_ratio, label="OLS for gave on ratio dummies")
+print("Response rate difference, 1:1 vs 2:1 =", (gave_2to1.mean() - gave_1to1.mean())*100)
+print("Response rate difference, 2:1 vs 3:1 =", (gave_3to1.mean() - gave_2to1.mean())*100)
+
+# Donation Amounts
+amt_treat = df_treat['amount'].fillna(0)
+amt_cont = df_cont['amount'].fillna(0)
+t_amt, p_amt, df_amt_ = ttest_ind(amt_treat, amt_cont, usevar='unequal')
+model_amt_ols = smf.ols("amount ~ treatment", data=df).fit()
+short_summary(model_amt_ols, label="OLS for unconditional 'amount'")
+
+df_givers = df[df['gave'] == 1]
+amt_treat_g = df_givers[df_givers['treatment']==1]['amount']
+amt_cont_g = df_givers[df_givers['control']==1]['amount']
+t_amt_g, p_amt_g, df_amt_g = ttest_ind(amt_treat_g, amt_cont_g, usevar='unequal')
+model_amt_cond_ols = smf.ols("amount ~ treatment", data=df_givers).fit()
+short_summary(model_amt_cond_ols, label="OLS for amount among donors")
+
+# LLN Simulation
+N_sims = 10000
+p_c = 0.018
+p_t = 0.022
+sim_c = np.random.binomial(1, p_c, size=N_sims)
+sim_t = np.random.binomial(1, p_t, size=N_sims)
+diff_vec = sim_t - sim_c
+cum_avg = np.cumsum(diff_vec) / np.arange(1, N_sims+1)
+
+# CLT Simulation
+def draw_mean_diffs(n_control, n_treatment, iters=1000):
+    out = []
+    for _ in range(iters):
+        c_draws = np.random.binomial(1, p_c, size=n_control)
+        t_draws = np.random.binomial(1, p_t, size=n_treatment)
+        out.append(t_draws.mean() - c_draws.mean())
+    return np.array(out)
+
+for s in [50, 200, 500, 1000]:
+    diffs = draw_mean_diffs(s, s)
+```
+
+
+
