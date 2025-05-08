@@ -28,8 +28,6 @@ Blueprinty customers are not selected at random. It may be important to account 
 ### Setup
 
 ```{python}
-#| code-summary: "Setup (Imports)"
-#| echo: false
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
