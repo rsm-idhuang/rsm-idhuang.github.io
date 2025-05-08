@@ -280,5 +280,4 @@ glm_air = smf.glm(
 print("\nPoisson regression (Airbnb) – tidy results")
 print(glm_air.summary2().tables[1][["Coef.", "Std.Err.", "z", "P>|z|"]].round(4))
 
-print("\nFigures saved to ./figures — Done.")
 ```
