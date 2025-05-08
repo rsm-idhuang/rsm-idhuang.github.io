@@ -1,9 +1,298 @@
-# This is Project 2
+---
+title: "Poisson Regression Examples"
+author: "Idris Huang"
+date: May 7, 2025
+format:
+  html:
+    code-fold: true
+    code-summary: "Show/Hide Code"
+    toc: true
+    toc-depth: 2
+execute:
+  echo: true
+  eval: true
+  freeze: true
+callout-appearance: minimal
+---
 
-## Section 1: Data
+## Blueprinty Case Study
 
-I cleaned some data
+### Introduction
 
-## Section 2: Analysis
+Blueprinty is a small firm that makes software for developing blueprints specifically for submitting patent applications to the US patent office. Their marketing team would like to make the claim that patent applicants using Blueprinty’s software are more successful in getting their patent applications approved. Ideal data to study such an effect might include the success rate of patent applications **before** using Blueprinty’s software and **after** using it. Unfortunately, such data is not available.  
 
-I analyzed the data.
+However, Blueprinty has collected data on **1,500 mature (non-startup) engineering firms**. The data include each firm’s number of patents awarded over the last five years, regional location, age since incorporation, and whether or not the firm uses Blueprinty’s software. The marketing team would like to use this data to make the claim that firms using Blueprinty’s software are more successful in getting their patent applications approved.  
+
+Blueprinty customers are not selected at random. It may be important to account for systematic differences in the age and regional location of customers vs non-customers.
+
+### Data
+
+```{python}
+import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
+import statsmodels.api as sm
+import statsmodels.formula.api as smf
+from scipy.special import gammaln
+from scipy.optimize import minimize
+from scipy.stats import norm
+import pathlib
+import pandas as pd, matplotlib.pyplot as plt, numpy as np, pathlib
+blue = (pd.read_csv("blueprinty.csv")
+          .replace([np.inf, -np.inf], np.nan)
+          .dropna(subset=["patents", "age", "region", "iscustomer"]))
+blue["age2"] = blue["age"]**2
+
+# summary tables
+print("--- Patents by customer status ---")
+print(blue.groupby("iscustomer")["patents"].describe()[["mean","std"]])
+print("\n--- Age by customer status ---")
+print(blue.groupby("iscustomer")["age"].describe()[["mean","std","min","max"]])
+print("\n--- Region shares ---")
+print(pd.crosstab(blue["region"], blue["iscustomer"], normalize="columns").round(3))
+```
+
+```{python}
+fig, ax = plt.subplots()
+for cust, grp in blue.groupby("iscustomer"):
+    ax.hist(grp["patents"],
+            bins=np.arange(grp["patents"].max()+2)-0.5,
+            alpha=0.6, label=f"Customer = {cust}")
+ax.set(title="Patent Count by Customer Status",
+       xlabel="Patents (last 5 yrs)", ylabel="Frequency")
+ax.legend()
+pathlib.Path("figures").mkdir(exist_ok=True)
+fig.savefig("figures/blue_hist_patents.png", dpi=300)
+```
+
+![](figures/blue_hist_patents.png){width=70%}
+
+### Estimation of Simple Poisson Model
+
+Since our outcome variable of interest can only be small integer values per a set unit of time, we can use a Poisson density to model the number of patents awarded to each engineering firm over the last five years. We start by estimating a simple Poisson model via Maximum Likelihood.
+
+```{python}
+from scipy.special import gammaln
+from scipy.optimize import minimize
+Y = blue["patents"].astype(int).to_numpy()
+
+def nll(lmbda):
+    l = lmbda[0]
+    return np.inf if l<=0 else -(Y*np.log(l)-l-gammaln(Y+1)).sum()
+
+λ_grid = np.linspace(0.1, Y.mean()*3, 400)
+ll_vals = [-nll([g]) for g in λ_grid]
+
+plt.figure()
+plt.plot(λ_grid, ll_vals)
+plt.axvline(Y.mean(), ls="--", label=r"$\bar{Y}$")
+plt.title("Log-likelihood for λ (Simple Poisson)")
+plt.xlabel("λ"); plt.ylabel("Log-likelihood"); plt.legend()
+plt.tight_layout(); plt.savefig("figures/blue_ll_curve.png", dpi=300)
+
+mle = minimize(nll, [Y.mean()], bounds=[(1e-9,None)])
+print("MLE λ̂ =", round(mle.x[0],4))
+```
+
+![](figures/blue_ll_curve.png){width=70%}
+
+### Estimation of Poisson Regression Model
+
+Next, we extend our simple Poisson model to a Poisson Regression Model such that  
+$Y_i \sim \text{Poisson}(\lambda_i)$ where $\lambda_i=\exp(X_i'\beta)$. The interpretation is that the success rate of patent awards is not constant across all firms ($\lambda$) but rather is a function of firm characteristics $X_i$. Specifically, we use the covariates **age, age squared, region**, and whether the firm **is a customer** of Blueprinty.
+
+```{python}
+import statsmodels.formula.api as smf
+glm_blue = smf.glm("patents ~ age + age2 + C(region) + iscustomer",
+                   data=blue, family=sm.families.Poisson()).fit()
+print(glm_blue.summary2().tables[1][["Coef.","Std.Err.","z","P>|z|"]].round(4))
+```
+
+```{python}
+mu_no  = glm_blue.predict(blue.assign(iscustomer=0))
+mu_yes = glm_blue.predict(blue.assign(iscustomer=1))
+print("Average predicted Δ patents if all became customers:",
+      round((mu_yes-mu_no).mean(),3))
+```
+
+*Interpretation:* The customer coefficient β̂ ≈ 0.208 (p < 0.001) implies Blueprinty users file **≈ 23 %** more patents; the average predicted gain is **0.79 patents** over five years.
+
+---
+
+## AirBnB Case Study
+
+### Introduction
+
+AirBnB is a popular platform for booking short-term rentals. In March 2017, students Annika Awad, Evan Lebo, and Anna Linden scraped 40 000 Airbnb listings from New York City. The data include the following variables:
+
+:::: {.callout-note collapse="true"}
+### Variable Definitions
+
+    - `id` = unique ID number for each unit
+    - `last_scraped` = date when information scraped
+    - `host_since` = date when host first listed the unit on Airbnb
+    - `days` = `last_scraped` - `host_since` = number of days the unit has been listed
+    - `room_type` = Entire home/apt., Private room, or Shared room
+    - `bathrooms` = number of bathrooms
+    - `bedrooms` = number of bedrooms
+    - `price` = price per night (dollars)
+    - `number_of_reviews` = number of reviews for the unit on Airbnb
+    - `review_scores_cleanliness` = a cleanliness score from reviews (1-10)
+    - `review_scores_location` = a "quality of location" score from reviews (1-10)
+    - `review_scores_value` = a "quality of value" score from reviews (1-10)
+    - `instant_bookable` = "t" if instantly bookable, "f" if not
+
+::::
+
+### Data
+
+```{python}
+air = (pd.read_csv("airbnb.csv")
+         .assign(instant_bookable=lambda d:(d["instant_bookable"]=="t").astype(int))
+         .dropna(subset=["number_of_reviews","days","room_type","bathrooms",
+                         "bedrooms","price",
+                         "review_scores_cleanliness","review_scores_location",
+                         "review_scores_value"]))
+print("Rows after cleaning:", len(air))
+```
+
+```{python}
+air["number_of_reviews"].hist(bins=50)
+plt.title("Review Count Distribution")
+plt.xlabel("Number of Reviews"); plt.ylabel("Frequency")
+plt.tight_layout(); plt.savefig("figures/air_reviews_hist.png", dpi=300)
+```
+
+![](figures/air_reviews_hist.png){width=70%}
+
+### Estimation of Poisson Regression Model
+
+```{python}
+glm_air = smf.glm(
+    formula="""number_of_reviews ~ days + bathrooms + bedrooms + price
+               + review_scores_cleanliness + review_scores_location
+               + review_scores_value + instant_bookable + C(room_type)""",
+    data=air, family=sm.families.Poisson()).fit()
+
+print(glm_air.summary2().tables[1][["Coef.","Std.Err.","z","P>|z|"]].round(4))
+```
+
+*Discussion:* Older listings, lower prices, higher quality scores, and the instant-booking feature all raise expected bookings. Entire homes or apartments outperform private and shared rooms.
+
+---
+
+## Summary & Conclusion
+
+* **Blueprinty:** After controlling for age and region, customers secure **≈ 0.8 additional patents** (≈ 23 % lift) over five years.  
+* **AirBnB:** Booking intensity (review count) responds strongly to listing age, price, room type, perceived quality, and instant-booking convenience.
+
+Maximum-Likelihood Poisson regression provides an effective framework for evaluating count-data outcomes in marketing analytics.
+
+## Full Code
+
+```{python}
+#| echo: true
+#| eval: false
+
+import pathlib, numpy as np, pandas as pd, matplotlib.pyplot as plt
+from scipy.special import gammaln
+from scipy.optimize import minimize
+from scipy.stats import norm
+import statsmodels.api as sm
+import statsmodels.formula.api as smf
+
+plt.rcParams["figure.figsize"] = (7, 5)
+plt.rcParams["axes.prop_cycle"] = plt.cycler(color=["#1f77b4", "#ff7f0e"])
+pathlib.Path("figures").mkdir(exist_ok=True)
+
+#BLUEPRINTY CASE
+blue = (pd.read_csv("blueprinty.csv")
+          .replace([np.inf, -np.inf], np.nan)
+          .dropna(subset=["patents", "age", "region", "iscustomer"]))
+blue["age2"] = blue["age"] ** 2
+Y_b = blue["patents"].astype(int).values
+
+# Histograms and summary tables
+fig, ax = plt.subplots()
+for cust, grp in blue.groupby("iscustomer"):
+    ax.hist(grp["patents"],
+            bins=np.arange(grp["patents"].max() + 2) - 0.5,
+            alpha=0.6, label=f"Customer = {cust}")
+ax.set(title="Patent count distribution by Blueprinty customer status",
+       xlabel="Patents (last 5 yrs)", ylabel="Frequency")
+ax.legend()
+fig.savefig("figures/blue_hist_patents.png", dpi=300)
+
+print("\nMean ± SD of patents by customer status")
+print(blue.groupby("iscustomer")["patents"]
+           .agg(["mean", "std", "count"]).round(3))
+
+print("\nAge summary by customer status")
+print(blue.groupby("iscustomer")["age"]
+           .describe()[["mean", "std", "min", "max"]].round(2))
+
+print("\nRegion shares (row-percent) by customer status")
+print(pd.crosstab(blue["region"], blue["iscustomer"], normalize="columns")
+        .round(3).rename(columns={0: "Non-cust", 1: "Cust"}))
+
+# Simple Poisson likelihood & MLE
+def pois_nll(lmbda, y):
+    l = lmbda[0]
+    return np.inf if l <= 0 else -np.sum(y*np.log(l) - l - gammaln(y+1))
+
+λ_grid = np.linspace(0.1, Y_b.mean()*3, 400)
+ll_vals = [-pois_nll([g], Y_b) for g in λ_grid]
+
+plt.figure()
+plt.plot(λ_grid, ll_vals)
+plt.axvline(Y_b.mean(), ls="--", label=r"$\bar{Y}$")
+plt.title("Log-likelihood for λ (Simple Poisson)")
+plt.xlabel("λ"); plt.ylabel("Log-likelihood"); plt.legend()
+plt.tight_layout(); plt.savefig("figures/blue_ll_curve.png", dpi=300)
+
+optλ = minimize(pois_nll, [Y_b.mean()], args=(Y_b,), bounds=[(1e-9, None)])
+print(f"\nSimple-Poisson MLE λ̂ = {optλ.x[0]:.5g}  (sample mean = {Y_b.mean():.5g})")
+
+# Poisson regression via statsmodels
+glm_blue = smf.glm("patents ~ age + age2 + C(region) + iscustomer",
+                   data=blue, family=sm.families.Poisson()).fit()
+print("\nPoisson regression (Blueprinty) – tidy results")
+print(glm_blue.summary2().tables[1][["Coef.","Std.Err.","z","P>|z|"]].round(4))
+
+# Average treatment effect
+mu_no  = glm_blue.predict(blue.assign(iscustomer=0))
+mu_yes = glm_blue.predict(blue.assign(iscustomer=1))
+print(f"\nAvg predicted Δ patents if all became customers: {(mu_yes-mu_no).mean():.3f}")
+
+# AIRBNB CASE
+air = (pd.read_csv("airbnb.csv")
+         .assign(instant_bookable=lambda d:(d["instant_bookable"]=="t").astype(int))
+         .dropna(subset=["number_of_reviews","days","room_type","bathrooms",
+                         "bedrooms","price","review_scores_cleanliness",
+                         "review_scores_location","review_scores_value"]))
+print("Rows after cleaning:", len(air))
+
+plt.figure()
+air["number_of_reviews"].hist(bins=50)
+plt.title("Review count distribution")
+plt.xlabel("Number of reviews"); plt.ylabel("Frequency")
+plt.tight_layout(); plt.savefig("figures/air_reviews_hist.png", dpi=300)
+
+# AirBnB Poisson regression (formula version avoids dtype issues)
+import statsmodels.formula.api as smf
+
+# statsmodels will dummy-code room_type automatically with C(room_type)
+glm_air = smf.glm(
+    formula="""number_of_reviews ~ days + bathrooms + bedrooms + price
+               + review_scores_cleanliness + review_scores_location
+               + review_scores_value + instant_bookable
+               + C(room_type)""",
+    data=air,
+    family=sm.families.Poisson()
+).fit()
+
+print("\nPoisson regression (Airbnb) – tidy results")
+print(glm_air.summary2().tables[1][["Coef.", "Std.Err.", "z", "P>|z|"]].round(4))
+
+print("\nFigures saved to ./figures — Done.")
+```
