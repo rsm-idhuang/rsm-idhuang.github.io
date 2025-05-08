@@ -92,8 +92,7 @@ print("MLE λ̂ =", round(mle.x[0], 4))
 
 ### Estimation of Poisson Regression Model
 
-Next, we extend our simple Poisson model to a Poisson Regression Model such that  
-$Y_i \sim \text{Poisson}(\lambda_i)$ where $\lambda_i=\exp(X_i'\beta)$. The interpretation is that the success rate of patent awards is not constant across all firms ($\lambda$) but rather is a function of firm characteristics $X_i$. Specifically, we use the covariates **age, age squared, region**, and whether the firm **is a customer** of Blueprinty.
+Next, we extend our simple Poisson model to a Poisson Regression Model such that $Y_i \sim \text{Poisson}(\lambda_i)$ where $\lambda_i=\exp(X_i'\beta)$. The interpretation is that the success rate of patent awards is not constant across all firms ($\lambda$) but rather is a function of firm characteristics $X_i$. Specifically, we use the covariates **age, age squared, region**, and whether the firm **is a customer** of Blueprinty.
 
 ```{python}
 glm_blue = smf.glm("patents ~ age + age2 + C(region) + iscustomer",
@@ -165,7 +164,7 @@ print(glm_air.summary2().tables[1][["Coef.","Std.Err.","z","P>|z|"]].round(4))
 
 ---
 
-## Summary & Conclusion
+## Summary
 
 * **Blueprinty:** After controlling for age and region, customers secure **≈ 0.8 additional patents** (≈ 23 % lift) over five years.  
 * **AirBnB:** Booking intensity (review count) responds strongly to listing age, price, room type, perceived quality, and instant-booking convenience.

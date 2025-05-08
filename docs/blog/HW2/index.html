@@ -185,7 +185,7 @@ window.Quarto = {
   <ul class="collapse">
   <li><a href="#blueprinty-case-study" id="toc-blueprinty-case-study" class="nav-link active" data-scroll-target="#blueprinty-case-study">Blueprinty Case Study</a></li>
   <li><a href="#airbnb-case-study" id="toc-airbnb-case-study" class="nav-link" data-scroll-target="#airbnb-case-study">AirBnB Case Study</a></li>
-  <li><a href="#summary-conclusion" id="toc-summary-conclusion" class="nav-link" data-scroll-target="#summary-conclusion">Summary &amp; Conclusion</a></li>
+  <li><a href="#summary" id="toc-summary" class="nav-link" data-scroll-target="#summary">Summary</a></li>
   <li><a href="#full-code" id="toc-full-code" class="nav-link" data-scroll-target="#full-code">Full Code</a></li>
   </ul>
 </nav>
@@ -234,7 +234,7 @@ window.Quarto = {
 </section>
 <section id="setup" class="level3">
 <h3 class="anchored" data-anchor-id="setup">Setup</h3>
-<div id="6a471db1" class="cell" data-execution_count="1">
+<div id="0729713f" class="cell" data-execution_count="1">
 <details class="code-fold">
 <summary>Show/Hide Code</summary>
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
@@ -250,7 +250,7 @@ window.Quarto = {
 </section>
 <section id="data" class="level3">
 <h3 class="anchored" data-anchor-id="data">Data</h3>
-<div id="1f15fe05" class="cell" data-execution_count="2">
+<div id="e2962bdd" class="cell" data-execution_count="2">
 <details class="code-fold">
 <summary>Show/Hide Code</summary>
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>blue <span class="op">=</span> (pd.read_csv(<span class="st">"blueprinty.csv"</span>)</span>
@@ -288,7 +288,7 @@ South       0.153  0.073
 Southwest   0.240  0.108</code></pre>
 </div>
 </div>
-<div id="6f1b9f2d" class="cell" data-execution_count="3">
+<div id="3de860ec" class="cell" data-execution_count="3">
 <details class="code-fold">
 <summary>Show/Hide Code</summary>
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots()</span>
@@ -313,7 +313,7 @@ Southwest   0.240  0.108</code></pre>
 <section id="estimation-of-simple-poisson-model" class="level3">
 <h3 class="anchored" data-anchor-id="estimation-of-simple-poisson-model">Estimation of Simple Poisson Model</h3>
 <p>Since our outcome variable of interest can only be small integer values per a set unit of time, we can use a Poisson density to model the number of patents awarded to each engineering firm over the last five years. We start by estimating a simple Poisson model via Maximum Likelihood.</p>
-<div id="22aeadc6" class="cell" data-execution_count="4">
+<div id="b55835c1" class="cell" data-execution_count="4">
 <details class="code-fold">
 <summary>Show/Hide Code</summary>
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>Y <span class="op">=</span> blue[<span class="st">"patents"</span>].astype(<span class="bu">int</span>).to_numpy()</span>
@@ -348,9 +348,8 @@ Southwest   0.240  0.108</code></pre>
 </section>
 <section id="estimation-of-poisson-regression-model" class="level3">
 <h3 class="anchored" data-anchor-id="estimation-of-poisson-regression-model">Estimation of Poisson Regression Model</h3>
-<p>Next, we extend our simple Poisson model to a Poisson Regression Model such that<br>
-<span class="math inline">\(Y_i \sim \text{Poisson}(\lambda_i)\)</span> where <span class="math inline">\(\lambda_i=\exp(X_i'\beta)\)</span>. The interpretation is that the success rate of patent awards is not constant across all firms (<span class="math inline">\(\lambda\)</span>) but rather is a function of firm characteristics <span class="math inline">\(X_i\)</span>. Specifically, we use the covariates <strong>age, age squared, region</strong>, and whether the firm <strong>is a customer</strong> of Blueprinty.</p>
-<div id="eefe1599" class="cell" data-execution_count="5">
+<p>Next, we extend our simple Poisson model to a Poisson Regression Model such that <span class="math inline">\(Y_i \sim \text{Poisson}(\lambda_i)\)</span> where <span class="math inline">\(\lambda_i=\exp(X_i'\beta)\)</span>. The interpretation is that the success rate of patent awards is not constant across all firms (<span class="math inline">\(\lambda\)</span>) but rather is a function of firm characteristics <span class="math inline">\(X_i\)</span>. Specifically, we use the covariates <strong>age, age squared, region</strong>, and whether the firm <strong>is a customer</strong> of Blueprinty.</p>
+<div id="b92c6304" class="cell" data-execution_count="5">
 <details class="code-fold">
 <summary>Show/Hide Code</summary>
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>glm_blue <span class="op">=</span> smf.glm(<span class="st">"patents ~ age + age2 + C(region) + iscustomer"</span>,</span>
@@ -369,7 +368,7 @@ age2                   -0.0030    0.0003 -11.5132  0.0000
 iscustomer              0.2076    0.0309   6.7192  0.0000</code></pre>
 </div>
 </div>
-<div id="5b08b1b0" class="cell" data-execution_count="6">
+<div id="59c08e1a" class="cell" data-execution_count="6">
 <details class="code-fold">
 <summary>Show/Hide Code</summary>
 <div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>mu_no  <span class="op">=</span> glm_blue.predict(blue.assign(iscustomer<span class="op">=</span><span class="dv">0</span>))</span>
@@ -425,7 +424,7 @@ Variable Definitions
 </section>
 <section id="data-1" class="level3">
 <h3 class="anchored" data-anchor-id="data-1">Data</h3>
-<div id="8f3fd98b" class="cell" data-execution_count="7">
+<div id="d8aad8df" class="cell" data-execution_count="7">
 <details class="code-fold">
 <summary>Show/Hide Code</summary>
 <div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>air <span class="op">=</span> (pd.read_csv(<span class="st">"airbnb.csv"</span>)</span>
@@ -440,7 +439,7 @@ Variable Definitions
 <pre><code>Rows after cleaning: 30160</code></pre>
 </div>
 </div>
-<div id="8a107176" class="cell" data-execution_count="8">
+<div id="5d85359d" class="cell" data-execution_count="8">
 <details class="code-fold">
 <summary>Show/Hide Code</summary>
 <div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>air[<span class="st">"number_of_reviews"</span>].hist(bins<span class="op">=</span><span class="dv">50</span>)</span>
@@ -459,7 +458,7 @@ Variable Definitions
 </section>
 <section id="estimation-of-poisson-regression-model-1" class="level3">
 <h3 class="anchored" data-anchor-id="estimation-of-poisson-regression-model-1">Estimation of Poisson Regression Model</h3>
-<div id="06c456d6" class="cell" data-execution_count="9">
+<div id="6b9478a9" class="cell" data-execution_count="9">
 <details class="code-fold">
 <summary>Show/Hide Code</summary>
 <div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>glm_air <span class="op">=</span> smf.glm(</span>
@@ -489,8 +488,8 @@ instant_bookable              0.3459    0.0029  119.6656  0.0000</code></pre>
 <hr>
 </section>
 </section>
-<section id="summary-conclusion" class="level2">
-<h2 class="anchored" data-anchor-id="summary-conclusion">Summary &amp; Conclusion</h2>
+<section id="summary" class="level2">
+<h2 class="anchored" data-anchor-id="summary">Summary</h2>
 <ul>
 <li><strong>Blueprinty:</strong> After controlling for age and region, customers secure <strong>≈ 0.8 additional patents</strong> (≈ 23 % lift) over five years.<br>
 </li>
@@ -500,7 +499,7 @@ instant_bookable              0.3459    0.0029  119.6656  0.0000</code></pre>
 </section>
 <section id="full-code" class="level2">
 <h2 class="anchored" data-anchor-id="full-code">Full Code</h2>
-<div id="7cd9ca30" class="cell" data-execution_count="10">
+<div id="20949fd5" class="cell" data-execution_count="10">
 <details class="code-fold">
 <summary>Show/Hide Code</summary>
 <div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pathlib, numpy <span class="im">as</span> np, pandas <span class="im">as</span> pd, matplotlib.pyplot <span class="im">as</span> plt</span>
