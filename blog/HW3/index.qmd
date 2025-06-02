@@ -144,7 +144,7 @@ mle_results
 * **Brand effects:** Choosing **Netflix** (β ≈ 0.94) raises utility almost twice as much as choosing **Amazon Prime** (β ≈ 0.50) relative to Hulu.  Converting to willingness-to-pay with –β<sub>price</sub> (≈ 0.10) gives ≈ \$9.5 / month for Netflix and ≈ \$5.0 for Prime.  
 * **Advertising penalty:** An ad-supported plan lowers utility by −0.73, implying consumers need about a **\$7.4/month discount** to accept ads—close to real-world pricing for “with-ads” tiers.  
 * **Price sensitivity:** Utility falls by ≈ 0.10 for every extra \$1 of monthly fee—price matters, but less than brand or ads.  
-* 95 % confidence intervals (β ± 1.96 × SE) exclude zero for every attribute, confirming statistical significance.
+* 95% confidence intervals (β ± 1.96 × SE) exclude zero for every attribute, confirming statistical significance.
 
 ## 5. Estimation via Bayesian Methods
 
@@ -186,7 +186,7 @@ az.summary(trace, var_names=design_cols_bayes)
 
 Posterior means (0.94, 0.50, −0.74, −0.10) are virtually identical to the MLE estimates, confirming that weakly-informative priors let the data dominate.
 
-* **Credible intervals:** 94 % HDIs comfortably straddle the true simulated values and exclude zero.  
+* **Credible intervals:** 94% HDIs comfortably straddle the true simulated values and exclude zero.  
 * **Chain quality:** Effective sample sizes > 30 k and $\hat R = 1.00$ for every parameter; trace plots show well-mixed, stationary chains with no divergences.  
 * **Bayesian WTP:** Converting coefficients yields WTP<sub>Netflix</sub> ≈ \$9.4, WTP<sub>Prime</sub> ≈ \$5.0, and a –\$7.3 penalty for ads—nearly identical to MLE numbers but now accompanied by full uncertainty bounds.
 
