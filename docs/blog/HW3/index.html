@@ -260,7 +260,7 @@ u_{ij} = (1 \times Netflix_j) + (0.5 \times Prime_j) + (-0.8*Ads_j) - 0.1\times 
 \]</span></p>
 <p>where the variables are binary indicators and <span class="math inline">\(\varepsilon\)</span> is Type 1 Extreme Value (ie, Gumble) distributed.</p>
 <p>The following code imports the previously–simulated conjoint data.</p>
-<div id="73335380" class="cell" data-execution_count="1">
+<div id="2e98d95f" class="cell" data-execution_count="1">
 <details class="code-fold">
 <summary>Show/Hide Code</summary>
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
@@ -341,7 +341,7 @@ u_{ij} = (1 \times Netflix_j) + (0.5 \times Prime_j) + (-0.8*Ads_j) - 0.1\times 
 <section id="preparing-the-data-for-estimation" class="level2">
 <h2 class="anchored" data-anchor-id="preparing-the-data-for-estimation">3. Preparing the Data for Estimation</h2>
 <p>The “hard part” of the MNL likelihood function is organizing the data, as we need to keep track of 3 dimensions (consumer <span class="math inline">\(i\)</span>, covariate <span class="math inline">\(k\)</span>, and product <span class="math inline">\(j\)</span>) instead of the typical 2 dimensions for cross-sectional regression models (consumer <span class="math inline">\(i\)</span> and covariate <span class="math inline">\(k\)</span>). The fact that each task for each respondent has the same number of alternatives (3) helps. In addition, we need to convert the categorical variables for brand and ads into binary variables.</p>
-<div id="57777492" class="cell" data-execution_count="2">
+<div id="9a34eefe" class="cell" data-execution_count="2">
 <details class="code-fold">
 <summary>Show/Hide Code</summary>
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Data preparation for MNL</span></span>
@@ -374,7 +374,7 @@ Number of unique choice tasks: 1000</code></pre>
 </section>
 <section id="estimation-via-maximum-likelihood" class="level2">
 <h2 class="anchored" data-anchor-id="estimation-via-maximum-likelihood">4. Estimation via Maximum Likelihood</h2>
-<div id="9cd07a77" class="cell" data-execution_count="3">
+<div id="8a398ef5" class="cell" data-execution_count="3">
 <details class="code-fold">
 <summary>Show/Hide Code</summary>
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Maximum Likelihood Estimation</span></span>
@@ -455,11 +455,11 @@ Number of unique choice tasks: 1000</code></pre>
 <ul>
 <li><strong>All coefficients are highly significant</strong> (|z| ≫ 1.96) and have the expected signs.<br>
 </li>
-<li><strong>Brand effects.</strong> Choosing <strong>Netflix</strong> (β ≈ 0.94) raises utility almost twice as much as choosing <strong>Amazon Prime</strong> (β ≈ 0.50) relative to Hulu. Converting to willingness-to-pay with –β<sub>price</sub> (≈ 0.10) gives ≈ $9.5 / month for Netflix and ≈ $5.0 for Prime.<br>
+<li><strong>Brand effects:</strong> Choosing <strong>Netflix</strong> (β ≈ 0.94) raises utility almost twice as much as choosing <strong>Amazon Prime</strong> (β ≈ 0.50) relative to Hulu. Converting to willingness-to-pay with –β<sub>price</sub> (≈ 0.10) gives ≈ $9.5 / month for Netflix and ≈ $5.0 for Prime.<br>
 </li>
-<li><strong>Advertising penalty.</strong> An ad-supported plan lowers utility by −0.73, implying consumers need about a <strong>$7.4/month discount</strong> to accept ads—close to real-world pricing for “with-ads” tiers.<br>
+<li><strong>Advertising penalty:</strong> An ad-supported plan lowers utility by −0.73, implying consumers need about a <strong>$7.4/month discount</strong> to accept ads—close to real-world pricing for “with-ads” tiers.<br>
 </li>
-<li><strong>Price sensitivity.</strong> Utility falls by ≈ 0.10 for every extra $1 of monthly fee—price matters, but less than brand or ads.<br>
+<li><strong>Price sensitivity:</strong> Utility falls by ≈ 0.10 for every extra $1 of monthly fee—price matters, but less than brand or ads.<br>
 </li>
 <li>95 % confidence intervals (β ± 1.96 × SE) exclude zero for every attribute, confirming statistical significance.</li>
 </ul>
@@ -467,7 +467,7 @@ Number of unique choice tasks: 1000</code></pre>
 </section>
 <section id="estimation-via-bayesian-methods" class="level2">
 <h2 class="anchored" data-anchor-id="estimation-via-bayesian-methods">5. Estimation via Bayesian Methods</h2>
-<div id="0431a699" class="cell" data-execution_count="4">
+<div id="b632853b" class="cell" data-execution_count="4">
 <details class="code-fold">
 <summary>Show/Hide Code</summary>
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Bayesian Estimation via MCMC</span></span>
@@ -530,38 +530,38 @@ Sampling 4 chains for 1_000 tune and 10_000 draw iterations (4_000 + 40_000 draw
 <tbody>
 <tr class="odd">
 <td data-quarto-table-cell-role="th">brand_N</td>
-<td>0.944</td>
+<td>0.943</td>
 <td>0.111</td>
-<td>0.738</td>
-<td>1.154</td>
+<td>0.735</td>
+<td>1.155</td>
 <td>0.001</td>
 <td>0.001</td>
-<td>33283.0</td>
-<td>30265.0</td>
+<td>32820.0</td>
+<td>29291.0</td>
 <td>1.0</td>
 </tr>
 <tr class="even">
 <td data-quarto-table-cell-role="th">brand_P</td>
-<td>0.503</td>
-<td>0.110</td>
-<td>0.292</td>
-<td>0.707</td>
+<td>0.502</td>
+<td>0.111</td>
+<td>0.294</td>
+<td>0.711</td>
 <td>0.001</td>
 <td>0.001</td>
-<td>33570.0</td>
-<td>29456.0</td>
+<td>32313.0</td>
+<td>29139.0</td>
 <td>1.0</td>
 </tr>
 <tr class="odd">
 <td data-quarto-table-cell-role="th">ad_yes</td>
-<td>-0.733</td>
+<td>-0.734</td>
 <td>0.088</td>
 <td>-0.900</td>
-<td>-0.569</td>
+<td>-0.570</td>
 <td>0.000</td>
 <td>0.000</td>
-<td>36591.0</td>
-<td>28974.0</td>
+<td>36807.0</td>
+<td>29491.0</td>
 <td>1.0</td>
 </tr>
 <tr class="even">
@@ -572,8 +572,8 @@ Sampling 4 chains for 1_000 tune and 10_000 draw iterations (4_000 + 40_000 draw
 <td>-0.088</td>
 <td>0.000</td>
 <td>0.000</td>
-<td>34311.0</td>
-<td>28654.0</td>
+<td>35236.0</td>
+<td>29361.0</td>
 <td>1.0</td>
 </tr>
 </tbody>
@@ -593,11 +593,11 @@ Sampling 4 chains for 1_000 tune and 10_000 draw iterations (4_000 + 40_000 draw
 <h3 class="anchored" data-anchor-id="posterior-diagnostics-and-comparison-to-mle">Posterior diagnostics and comparison to MLE</h3>
 <p>Posterior means (0.94, 0.50, −0.74, −0.10) are virtually identical to the MLE estimates, confirming that weakly-informative priors let the data dominate.</p>
 <ul>
-<li><strong>Credible intervals.</strong> 94 % HDIs comfortably straddle the true simulated values and exclude zero.<br>
+<li><strong>Credible intervals:</strong> 94 % HDIs comfortably straddle the true simulated values and exclude zero.<br>
 </li>
-<li><strong>Chain quality.</strong> Effective sample sizes &gt; 30 k and <span class="math inline">\(\hat R = 1.00\)</span> for every parameter; trace plots show well-mixed, stationary chains with no divergences.<br>
+<li><strong>Chain quality:</strong> Effective sample sizes &gt; 30 k and <span class="math inline">\(\hat R = 1.00\)</span> for every parameter; trace plots show well-mixed, stationary chains with no divergences.<br>
 </li>
-<li><strong>Bayesian WTP.</strong> Converting coefficients yields WTP<sub>Netflix</sub> ≈ $9.4, WTP<sub>Prime</sub> ≈ $5.0, and a –$7.3 penalty for ads—nearly identical to MLE numbers but now accompanied by full uncertainty bounds.</li>
+<li><strong>Bayesian WTP:</strong> Converting coefficients yields WTP<sub>Netflix</sub> ≈ $9.4, WTP<sub>Prime</sub> ≈ $5.0, and a –$7.3 penalty for ads—nearly identical to MLE numbers but now accompanied by full uncertainty bounds.</li>
 </ul>
 </section>
 </section>
@@ -605,15 +605,15 @@ Sampling 4 chains for 1_000 tune and 10_000 draw iterations (4_000 + 40_000 draw
 <h2 class="anchored" data-anchor-id="discussion">6. Discussion</h2>
 <p><strong>Managerial take-aways</strong></p>
 <ol type="1">
-<li><strong>Brand still rules.</strong> A $4–10 monthly premium for the Netflix label underscores the enduring power of brand equity.<br>
+<li><strong>Brand still rules:</strong> A $4–10 monthly premium for the Netflix label underscores the enduring power of brand equity.<br>
 </li>
-<li><strong>Ads need real discounts.</strong> Consumers demand roughly a <strong>$7/month</strong> price break to tolerate ads; smaller gaps risk churn or dissatisfaction.<br>
+<li><strong>Ads need real discounts:</strong> Consumers demand roughly a <strong>$7/month</strong> price break to tolerate ads; smaller gaps risk churn or dissatisfaction.<br>
 </li>
-<li><strong>Moderate price elasticity.</strong> A $1 hike lowers utility by ~0.10—enough to shift share, but weaker than brand or ad effects.<br>
+<li><strong>Moderate price elasticity:</strong> A $1 hike lowers utility by ~0.10—enough to shift share, but weaker than brand or ad effects.<br>
 </li>
-<li><strong>MLE vs.&nbsp;Bayesian.</strong> With large, balanced conjoint data the two approaches converge; Bayesian estimation adds credible intervals and an easy path to hierarchical models.<br>
+<li><strong>MLE vs.&nbsp;Bayesian:</strong> With large, balanced conjoint data the two approaches converge; Bayesian estimation adds credible intervals and an easy path to hierarchical models.<br>
 </li>
-<li><strong>Potential next steps.</strong>
+<li><strong>Potential next steps:</strong>
 <ul>
 <li>Fit a hierarchical (HB-MNL) model to capture heterogeneity in price and ad sensitivity.<br>
 </li>
@@ -625,7 +625,7 @@ Sampling 4 chains for 1_000 tune and 10_000 draw iterations (4_000 + 40_000 draw
 </section>
 <section id="full-code" class="level2">
 <h2 class="anchored" data-anchor-id="full-code">7. Full Code</h2>
-<div id="8b89f76d" class="cell" data-execution_count="5">
+<div id="ee936062" class="cell" data-execution_count="5">
 <details class="code-fold">
 <summary>Show/Hide Code</summary>
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Imports </span></span>
