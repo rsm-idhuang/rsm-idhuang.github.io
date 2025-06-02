@@ -198,12 +198,12 @@ Posterior means (0.94, 0.50, −0.74, −0.10) are virtually identical to the ML
 2. **Ads need real discounts.** Consumers demand roughly a **\$7/month** price break to tolerate ads; smaller gaps risk churn or dissatisfaction.  
 3. **Moderate price elasticity.** A \$1 hike lowers utility by ~0.10—enough to shift share, but weaker than brand or ad effects.  
 4. **MLE vs. Bayesian.** With large, balanced conjoint data the two approaches converge; Bayesian estimation adds credible intervals and an easy path to hierarchical models.  
-5. **Next steps.**  
+5. **Potential next steps.**  
    * Fit a hierarchical (HB-MNL) model to capture heterogeneity in price and ad sensitivity.  
    * Include a “no-choice” option and more brands for greater external validity.  
    * Validate conjoint-based WTP against actual subscription behavior.
 
-## Full Code
+## 7. Full Code
 
 ```{python}
 #| echo: true

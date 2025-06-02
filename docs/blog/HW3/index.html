@@ -192,7 +192,7 @@ window.Quarto = {
   <li><a href="#estimation-via-maximum-likelihood" id="toc-estimation-via-maximum-likelihood" class="nav-link" data-scroll-target="#estimation-via-maximum-likelihood">4. Estimation via Maximum Likelihood</a></li>
   <li><a href="#estimation-via-bayesian-methods" id="toc-estimation-via-bayesian-methods" class="nav-link" data-scroll-target="#estimation-via-bayesian-methods">5. Estimation via Bayesian Methods</a></li>
   <li><a href="#discussion" id="toc-discussion" class="nav-link" data-scroll-target="#discussion">6. Discussion</a></li>
-  <li><a href="#full-code" id="toc-full-code" class="nav-link" data-scroll-target="#full-code">Full Code</a></li>
+  <li><a href="#full-code" id="toc-full-code" class="nav-link" data-scroll-target="#full-code">7. Full Code</a></li>
   </ul>
 </nav>
     </div>
@@ -260,7 +260,7 @@ u_{ij} = (1 \times Netflix_j) + (0.5 \times Prime_j) + (-0.8*Ads_j) - 0.1\times 
 \]</span></p>
 <p>where the variables are binary indicators and <span class="math inline">\(\varepsilon\)</span> is Type 1 Extreme Value (ie, Gumble) distributed.</p>
 <p>The following code imports the previously–simulated conjoint data.</p>
-<div id="326143c2" class="cell" data-execution_count="1">
+<div id="73335380" class="cell" data-execution_count="1">
 <details class="code-fold">
 <summary>Show/Hide Code</summary>
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
@@ -341,7 +341,7 @@ u_{ij} = (1 \times Netflix_j) + (0.5 \times Prime_j) + (-0.8*Ads_j) - 0.1\times 
 <section id="preparing-the-data-for-estimation" class="level2">
 <h2 class="anchored" data-anchor-id="preparing-the-data-for-estimation">3. Preparing the Data for Estimation</h2>
 <p>The “hard part” of the MNL likelihood function is organizing the data, as we need to keep track of 3 dimensions (consumer <span class="math inline">\(i\)</span>, covariate <span class="math inline">\(k\)</span>, and product <span class="math inline">\(j\)</span>) instead of the typical 2 dimensions for cross-sectional regression models (consumer <span class="math inline">\(i\)</span> and covariate <span class="math inline">\(k\)</span>). The fact that each task for each respondent has the same number of alternatives (3) helps. In addition, we need to convert the categorical variables for brand and ads into binary variables.</p>
-<div id="5ac3e5df" class="cell" data-execution_count="2">
+<div id="57777492" class="cell" data-execution_count="2">
 <details class="code-fold">
 <summary>Show/Hide Code</summary>
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Data preparation for MNL</span></span>
@@ -374,7 +374,7 @@ Number of unique choice tasks: 1000</code></pre>
 </section>
 <section id="estimation-via-maximum-likelihood" class="level2">
 <h2 class="anchored" data-anchor-id="estimation-via-maximum-likelihood">4. Estimation via Maximum Likelihood</h2>
-<div id="8ec84a3c" class="cell" data-execution_count="3">
+<div id="9cd07a77" class="cell" data-execution_count="3">
 <details class="code-fold">
 <summary>Show/Hide Code</summary>
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Maximum Likelihood Estimation</span></span>
@@ -467,7 +467,7 @@ Number of unique choice tasks: 1000</code></pre>
 </section>
 <section id="estimation-via-bayesian-methods" class="level2">
 <h2 class="anchored" data-anchor-id="estimation-via-bayesian-methods">5. Estimation via Bayesian Methods</h2>
-<div id="4a842b8d" class="cell" data-execution_count="4">
+<div id="0431a699" class="cell" data-execution_count="4">
 <details class="code-fold">
 <summary>Show/Hide Code</summary>
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Bayesian Estimation via MCMC</span></span>
@@ -531,37 +531,37 @@ Sampling 4 chains for 1_000 tune and 10_000 draw iterations (4_000 + 40_000 draw
 <tr class="odd">
 <td data-quarto-table-cell-role="th">brand_N</td>
 <td>0.944</td>
-<td>0.112</td>
-<td>0.735</td>
-<td>1.157</td>
+<td>0.111</td>
+<td>0.738</td>
+<td>1.154</td>
 <td>0.001</td>
 <td>0.001</td>
-<td>29861.0</td>
-<td>29176.0</td>
+<td>33283.0</td>
+<td>30265.0</td>
 <td>1.0</td>
 </tr>
 <tr class="even">
 <td data-quarto-table-cell-role="th">brand_P</td>
-<td>0.504</td>
-<td>0.112</td>
-<td>0.284</td>
-<td>0.705</td>
+<td>0.503</td>
+<td>0.110</td>
+<td>0.292</td>
+<td>0.707</td>
 <td>0.001</td>
 <td>0.001</td>
-<td>29405.0</td>
-<td>29196.0</td>
+<td>33570.0</td>
+<td>29456.0</td>
 <td>1.0</td>
 </tr>
 <tr class="odd">
 <td data-quarto-table-cell-role="th">ad_yes</td>
-<td>-0.735</td>
-<td>0.087</td>
-<td>-0.899</td>
-<td>-0.570</td>
+<td>-0.733</td>
+<td>0.088</td>
+<td>-0.900</td>
+<td>-0.569</td>
 <td>0.000</td>
 <td>0.000</td>
-<td>34570.0</td>
-<td>28862.0</td>
+<td>36591.0</td>
+<td>28974.0</td>
 <td>1.0</td>
 </tr>
 <tr class="even">
@@ -572,8 +572,8 @@ Sampling 4 chains for 1_000 tune and 10_000 draw iterations (4_000 + 40_000 draw
 <td>-0.088</td>
 <td>0.000</td>
 <td>0.000</td>
-<td>35949.0</td>
-<td>29984.0</td>
+<td>34311.0</td>
+<td>28654.0</td>
 <td>1.0</td>
 </tr>
 </tbody>
@@ -613,7 +613,7 @@ Sampling 4 chains for 1_000 tune and 10_000 draw iterations (4_000 + 40_000 draw
 </li>
 <li><strong>MLE vs.&nbsp;Bayesian.</strong> With large, balanced conjoint data the two approaches converge; Bayesian estimation adds credible intervals and an easy path to hierarchical models.<br>
 </li>
-<li><strong>Next steps.</strong>
+<li><strong>Potential next steps.</strong>
 <ul>
 <li>Fit a hierarchical (HB-MNL) model to capture heterogeneity in price and ad sensitivity.<br>
 </li>
@@ -624,8 +624,8 @@ Sampling 4 chains for 1_000 tune and 10_000 draw iterations (4_000 + 40_000 draw
 </ol>
 </section>
 <section id="full-code" class="level2">
-<h2 class="anchored" data-anchor-id="full-code">Full Code</h2>
-<div id="46dd7007" class="cell" data-execution_count="5">
+<h2 class="anchored" data-anchor-id="full-code">7. Full Code</h2>
+<div id="8b89f76d" class="cell" data-execution_count="5">
 <details class="code-fold">
 <summary>Show/Hide Code</summary>
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Imports </span></span>
