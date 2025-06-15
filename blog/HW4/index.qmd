@@ -16,9 +16,6 @@ callout-appearance: minimal
 ---
 
 ## 1. Overview  
-
-This homework has two main parts:
-
 * **K-Means (unsupervised):**  
   The K-means algorithm was implemented from scratch, applied to the *Palmer Penguins* dataset using **bill length** and **flipper length**.  Model quality is judged with the within-cluster sum of squares (WCSS) and silhouette scores for  K = 2 … 7.  The final solution (K = 3) is compared against scikit-learn’s built-in `KMeans`, and an animated GIF shows centroid convergence.
 

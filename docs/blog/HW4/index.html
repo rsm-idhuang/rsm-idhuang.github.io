@@ -202,7 +202,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <section id="overview" class="level2">
 <h2 class="anchored" data-anchor-id="overview">1. Overview</h2>
-<p>This homework has two main parts:</p>
 <ul>
 <li><p><strong>K-Means (unsupervised):</strong><br>
 The K-means algorithm was implemented from scratch, applied to the <em>Palmer Penguins</em> dataset using <strong>bill length</strong> and <strong>flipper length</strong>. Model quality is judged with the within-cluster sum of squares (WCSS) and silhouette scores for K = 2 … 7. The final solution (K = 3) is compared against scikit-learn’s built-in <code>KMeans</code>, and an animated GIF shows centroid convergence.</p></li>
@@ -213,14 +212,14 @@ A synthetic 2-dimensional, non-linear classification problem is generated with a
 </section>
 <section id="load-data" class="level2">
 <h2 class="anchored" data-anchor-id="load-data">2. Load Data</h2>
-<div id="91ad33ba" class="cell" data-execution_count="1">
+<div id="78c94b68" class="cell" data-execution_count="1">
 <details class="code-fold">
 <summary>Show / Hide Code</summary>
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>penguins <span class="op">=</span> pd.read_csv(<span class="st">"palmer_penguins.csv"</span>)</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>penguins.head()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
-<div class="cell-output cell-output-display" data-execution_count="1">
+<div class="cell-output cell-output-display" data-execution_count="14">
 <div>
 
 
@@ -306,7 +305,7 @@ A synthetic 2-dimensional, non-linear classification problem is generated with a
 <h2 class="anchored" data-anchor-id="k-means-1a">3. K-Means (1a)</h2>
 <section id="scale-features" class="level3">
 <h3 class="anchored" data-anchor-id="scale-features">3.1 Scale features</h3>
-<div id="45d6e167" class="cell" data-execution_count="2">
+<div id="e972acc8" class="cell" data-execution_count="2">
 <details class="code-fold">
 <summary>Show / Hide Code</summary>
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.preprocessing <span class="im">import</span> StandardScaler</span>
@@ -317,7 +316,7 @@ A synthetic 2-dimensional, non-linear classification problem is generated with a
 </section>
 <section id="custom-k-means-function" class="level3">
 <h3 class="anchored" data-anchor-id="custom-k-means-function">3.2 Custom K-Means function</h3>
-<div id="606ebb1a" class="cell" data-execution_count="3">
+<div id="895afeba" class="cell" data-execution_count="3">
 <details class="code-fold">
 <summary>Show / Hide Code</summary>
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
@@ -338,7 +337,7 @@ A synthetic 2-dimensional, non-linear classification problem is generated with a
 </section>
 <section id="wcss-silhouette-k-27" class="level3">
 <h3 class="anchored" data-anchor-id="wcss-silhouette-k-27">3.3 WCSS &amp; silhouette (K = 2–7)</h3>
-<div id="90a07ee1" class="cell" data-execution_count="4">
+<div id="a0cb9436" class="cell" data-execution_count="4">
 <details class="code-fold">
 <summary>Show / Hide Code</summary>
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
@@ -367,7 +366,7 @@ A synthetic 2-dimensional, non-linear classification problem is generated with a
 </section>
 <section id="fit-k-3-compare-to-sklearn" class="level3">
 <h3 class="anchored" data-anchor-id="fit-k-3-compare-to-sklearn">3.4 Fit K = 3 &amp; compare to sklearn</h3>
-<div id="b813b138" class="cell" data-execution_count="5">
+<div id="87ddaa8c" class="cell" data-execution_count="5">
 <details class="code-fold">
 <summary>Show / Hide Code</summary>
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.cluster <span class="im">import</span> KMeans</span>
@@ -390,7 +389,7 @@ Sklearn centroids:
 </section>
 <section id="centroid-movement-gif" class="level3">
 <h3 class="anchored" data-anchor-id="centroid-movement-gif">3.5 Centroid-movement GIF</h3>
-<div id="f8b59c11" class="cell" data-execution_count="6">
+<div id="12a9a3b0" class="cell" data-execution_count="6">
 <details class="code-fold">
 <summary>Show / Hide Code</summary>
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> PIL <span class="im">import</span> Image, ImageDraw</span>
@@ -426,7 +425,7 @@ Sklearn centroids:
 <h2 class="anchored" data-anchor-id="k-nearest-neighbours-2a">4. K-Nearest Neighbours (2a)</h2>
 <section id="training-data-seed-42" class="level3">
 <h3 class="anchored" data-anchor-id="training-data-seed-42">4.1 Training data (seed 42)</h3>
-<div id="5eac43cd" class="cell" data-execution_count="7">
+<div id="7d07aaa4" class="cell" data-execution_count="7">
 <details class="code-fold">
 <summary>Show / Hide Code</summary>
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>np.random.seed(<span class="dv">42</span>)<span class="op">;</span> n<span class="op">=</span><span class="dv">100</span></span>
@@ -440,7 +439,7 @@ Sklearn centroids:
 </section>
 <section id="plot-with-boundary" class="level3">
 <h3 class="anchored" data-anchor-id="plot-with-boundary">4.2 Plot with boundary</h3>
-<div id="ccc62876" class="cell" data-execution_count="8">
+<div id="b20414d6" class="cell" data-execution_count="8">
 <details class="code-fold">
 <summary>Show / Hide Code</summary>
 <div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>plt.scatter(train.x1,train.x2,c<span class="op">=</span>train.y,cmap<span class="op">=</span><span class="st">"bwr"</span>,edgecolor<span class="op">=</span><span class="st">"k"</span>)</span>
@@ -459,7 +458,7 @@ Sklearn centroids:
 </section>
 <section id="test-data-seed-2025" class="level3">
 <h3 class="anchored" data-anchor-id="test-data-seed-2025">4.3 Test data (seed 2025)</h3>
-<div id="d4aecf24" class="cell" data-execution_count="9">
+<div id="98d213c1" class="cell" data-execution_count="9">
 <details class="code-fold">
 <summary>Show / Hide Code</summary>
 <div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>np.random.seed(<span class="dv">2025</span>)</span>
@@ -472,7 +471,7 @@ Sklearn centroids:
 </section>
 <section id="hand-coded-knn-accuracy-curve" class="level3">
 <h3 class="anchored" data-anchor-id="hand-coded-knn-accuracy-curve">4.4 Hand-coded KNN + accuracy curve</h3>
-<div id="f81c4239" class="cell" data-execution_count="10">
+<div id="8661df3c" class="cell" data-execution_count="10">
 <details class="code-fold">
 <summary>Show / Hide Code</summary>
 <div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> collections <span class="im">import</span> Counter</span>
@@ -508,7 +507,7 @@ Sklearn centroids:
 </section>
 <section id="sklearn-check" class="level3">
 <h3 class="anchored" data-anchor-id="sklearn-check">4.5 Sklearn check</h3>
-<div id="0fdbb443" class="cell" data-execution_count="11">
+<div id="38bbd9c2" class="cell" data-execution_count="11">
 <details class="code-fold">
 <summary>Show / Hide Code</summary>
 <div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.neighbors <span class="im">import</span> KNeighborsClassifier</span>
@@ -522,7 +521,7 @@ Sklearn centroids:
 </section>
 <section id="decision-surface" class="level3">
 <h3 class="anchored" data-anchor-id="decision-surface">4.6 Decision surface</h3>
-<div id="f1523a2a" class="cell" data-execution_count="12">
+<div id="2393d88c" class="cell" data-execution_count="12">
 <details class="code-fold">
 <summary>Show / Hide Code</summary>
 <div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>xx,yy<span class="op">=</span>np.meshgrid(np.linspace(<span class="op">-</span><span class="dv">3</span>,<span class="dv">3</span>,<span class="dv">400</span>),np.linspace(<span class="op">-</span><span class="dv">3</span>,<span class="dv">3</span>,<span class="dv">400</span>))</span>
@@ -560,7 +559,7 @@ Sklearn centroids:
 </section>
 <section id="full-code" class="level2">
 <h2 class="anchored" data-anchor-id="full-code">6. Full Code</h2>
-<div id="54940e9e" class="cell" data-execution_count="13">
+<div id="e036c734" class="cell" data-execution_count="13">
 <details class="code-fold">
 <summary>Show / Hide Code</summary>
 <div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Imports</span></span>
