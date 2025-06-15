@@ -157,12 +157,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">On this page</h2>
    
   <ul class="collapse">
-  <li><a href="#overview" id="toc-overview" class="nav-link active" data-scroll-target="#overview">1 Overview</a></li>
-  <li><a href="#load-data" id="toc-load-data" class="nav-link" data-scroll-target="#load-data">2 Load Data</a></li>
-  <li><a href="#k-means-1a" id="toc-k-means-1a" class="nav-link" data-scroll-target="#k-means-1a">3 K-Means (1a)</a></li>
-  <li><a href="#k-nearest-neighbours-2a" id="toc-k-nearest-neighbours-2a" class="nav-link" data-scroll-target="#k-nearest-neighbours-2a">4 K-Nearest Neighbours (2a)</a></li>
-  <li><a href="#discussion" id="toc-discussion" class="nav-link" data-scroll-target="#discussion">5 Discussion</a></li>
-  <li><a href="#full-code" id="toc-full-code" class="nav-link" data-scroll-target="#full-code">6 Full Code</a></li>
+  <li><a href="#overview" id="toc-overview" class="nav-link active" data-scroll-target="#overview">1. Overview</a></li>
+  <li><a href="#load-data" id="toc-load-data" class="nav-link" data-scroll-target="#load-data">2. Load Data</a></li>
+  <li><a href="#k-means-1a" id="toc-k-means-1a" class="nav-link" data-scroll-target="#k-means-1a">3. K-Means (1a)</a></li>
+  <li><a href="#k-nearest-neighbours-2a" id="toc-k-nearest-neighbours-2a" class="nav-link" data-scroll-target="#k-nearest-neighbours-2a">4. K-Nearest Neighbours (2a)</a></li>
+  <li><a href="#discussion" id="toc-discussion" class="nav-link" data-scroll-target="#discussion">5. Discussion</a></li>
+  <li><a href="#full-code" id="toc-full-code" class="nav-link" data-scroll-target="#full-code">6. Full Code</a></li>
   </ul>
 </nav>
     </div>
@@ -201,19 +201,19 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 
 <section id="overview" class="level2">
-<h2 class="anchored" data-anchor-id="overview">1 Overview</h2>
+<h2 class="anchored" data-anchor-id="overview">1. Overview</h2>
 <p>This homework has two main parts:</p>
 <ul>
-<li><p><strong>Part 3 – K-Means (unsupervised):</strong><br>
-You will implement the K-means algorithm from scratch, apply it to the <em>Palmer Penguins</em> dataset using <strong>bill length</strong> and <strong>flipper length</strong>, and visualise the algorithm’s progress. Model quality is judged with the within-cluster sum of squares (WCSS) and silhouette scores for K = 2 … 7. The final solution (K = 3) is compared against scikit-learn’s built-in <code>KMeans</code>, and an animated GIF shows centroid convergence.</p></li>
-<li><p><strong>Part 4 – K-Nearest Neighbours (supervised):</strong><br>
-A synthetic 2-dimensional, non-linear classification problem is generated with a wiggly sine boundary. You will code K-NN by hand, validate it against scikit-learn’s <code>KNeighborsClassifier</code>, plot test-set accuracy for k = 1 … 30, highlight the optimal <em>k</em> (≈5), and display the resulting decision surface alongside the true boundary.</p></li>
+<li><p><strong>K-Means (unsupervised):</strong><br>
+The K-means algorithm was implemented from scratch, applied to the <em>Palmer Penguins</em> dataset using <strong>bill length</strong> and <strong>flipper length</strong>. Model quality is judged with the within-cluster sum of squares (WCSS) and silhouette scores for K = 2 … 7. The final solution (K = 3) is compared against scikit-learn’s built-in <code>KMeans</code>, and an animated GIF shows centroid convergence.</p></li>
+<li><p><strong>K-Nearest Neighbours (supervised):</strong><br>
+A synthetic 2-dimensional, non-linear classification problem is generated with a wiggly sine boundary. K-NN is coded by hand and validated against scikit-learn’s <code>KNeighborsClassifier</code>. Test-set accuracy was plotted for k = 1 … 30, highlight the optimal <em>k</em> (≈5), and display the resulting decision surface alongside the true boundary.</p></li>
 </ul>
 <hr>
 </section>
 <section id="load-data" class="level2">
-<h2 class="anchored" data-anchor-id="load-data">2 Load Data</h2>
-<div id="6c58720b" class="cell" data-execution_count="1">
+<h2 class="anchored" data-anchor-id="load-data">2. Load Data</h2>
+<div id="91ad33ba" class="cell" data-execution_count="1">
 <details class="code-fold">
 <summary>Show / Hide Code</summary>
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
@@ -303,10 +303,10 @@ A synthetic 2-dimensional, non-linear classification problem is generated with a
 <hr>
 </section>
 <section id="k-means-1a" class="level2">
-<h2 class="anchored" data-anchor-id="k-means-1a">3 K-Means (1a)</h2>
+<h2 class="anchored" data-anchor-id="k-means-1a">3. K-Means (1a)</h2>
 <section id="scale-features" class="level3">
 <h3 class="anchored" data-anchor-id="scale-features">3.1 Scale features</h3>
-<div id="c9828954" class="cell" data-execution_count="2">
+<div id="45d6e167" class="cell" data-execution_count="2">
 <details class="code-fold">
 <summary>Show / Hide Code</summary>
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.preprocessing <span class="im">import</span> StandardScaler</span>
@@ -317,7 +317,7 @@ A synthetic 2-dimensional, non-linear classification problem is generated with a
 </section>
 <section id="custom-k-means-function" class="level3">
 <h3 class="anchored" data-anchor-id="custom-k-means-function">3.2 Custom K-Means function</h3>
-<div id="5242c4a0" class="cell" data-execution_count="3">
+<div id="606ebb1a" class="cell" data-execution_count="3">
 <details class="code-fold">
 <summary>Show / Hide Code</summary>
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
@@ -338,7 +338,7 @@ A synthetic 2-dimensional, non-linear classification problem is generated with a
 </section>
 <section id="wcss-silhouette-k-27" class="level3">
 <h3 class="anchored" data-anchor-id="wcss-silhouette-k-27">3.3 WCSS &amp; silhouette (K = 2–7)</h3>
-<div id="7ea3506f" class="cell" data-execution_count="4">
+<div id="90a07ee1" class="cell" data-execution_count="4">
 <details class="code-fold">
 <summary>Show / Hide Code</summary>
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
@@ -367,7 +367,7 @@ A synthetic 2-dimensional, non-linear classification problem is generated with a
 </section>
 <section id="fit-k-3-compare-to-sklearn" class="level3">
 <h3 class="anchored" data-anchor-id="fit-k-3-compare-to-sklearn">3.4 Fit K = 3 &amp; compare to sklearn</h3>
-<div id="ef8f9988" class="cell" data-execution_count="5">
+<div id="b813b138" class="cell" data-execution_count="5">
 <details class="code-fold">
 <summary>Show / Hide Code</summary>
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.cluster <span class="im">import</span> KMeans</span>
@@ -390,7 +390,7 @@ Sklearn centroids:
 </section>
 <section id="centroid-movement-gif" class="level3">
 <h3 class="anchored" data-anchor-id="centroid-movement-gif">3.5 Centroid-movement GIF</h3>
-<div id="1f412e4f" class="cell" data-execution_count="6">
+<div id="f8b59c11" class="cell" data-execution_count="6">
 <details class="code-fold">
 <summary>Show / Hide Code</summary>
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> PIL <span class="im">import</span> Image, ImageDraw</span>
@@ -423,10 +423,10 @@ Sklearn centroids:
 </section>
 </section>
 <section id="k-nearest-neighbours-2a" class="level2">
-<h2 class="anchored" data-anchor-id="k-nearest-neighbours-2a">4 K-Nearest Neighbours (2a)</h2>
+<h2 class="anchored" data-anchor-id="k-nearest-neighbours-2a">4. K-Nearest Neighbours (2a)</h2>
 <section id="training-data-seed-42" class="level3">
 <h3 class="anchored" data-anchor-id="training-data-seed-42">4.1 Training data (seed 42)</h3>
-<div id="0ff029c1" class="cell" data-execution_count="7">
+<div id="5eac43cd" class="cell" data-execution_count="7">
 <details class="code-fold">
 <summary>Show / Hide Code</summary>
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>np.random.seed(<span class="dv">42</span>)<span class="op">;</span> n<span class="op">=</span><span class="dv">100</span></span>
@@ -440,7 +440,7 @@ Sklearn centroids:
 </section>
 <section id="plot-with-boundary" class="level3">
 <h3 class="anchored" data-anchor-id="plot-with-boundary">4.2 Plot with boundary</h3>
-<div id="bd7bba54" class="cell" data-execution_count="8">
+<div id="ccc62876" class="cell" data-execution_count="8">
 <details class="code-fold">
 <summary>Show / Hide Code</summary>
 <div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>plt.scatter(train.x1,train.x2,c<span class="op">=</span>train.y,cmap<span class="op">=</span><span class="st">"bwr"</span>,edgecolor<span class="op">=</span><span class="st">"k"</span>)</span>
@@ -459,7 +459,7 @@ Sklearn centroids:
 </section>
 <section id="test-data-seed-2025" class="level3">
 <h3 class="anchored" data-anchor-id="test-data-seed-2025">4.3 Test data (seed 2025)</h3>
-<div id="a0774e67" class="cell" data-execution_count="9">
+<div id="d4aecf24" class="cell" data-execution_count="9">
 <details class="code-fold">
 <summary>Show / Hide Code</summary>
 <div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>np.random.seed(<span class="dv">2025</span>)</span>
@@ -472,7 +472,7 @@ Sklearn centroids:
 </section>
 <section id="hand-coded-knn-accuracy-curve" class="level3">
 <h3 class="anchored" data-anchor-id="hand-coded-knn-accuracy-curve">4.4 Hand-coded KNN + accuracy curve</h3>
-<div id="1b6e3074" class="cell" data-execution_count="10">
+<div id="f81c4239" class="cell" data-execution_count="10">
 <details class="code-fold">
 <summary>Show / Hide Code</summary>
 <div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> collections <span class="im">import</span> Counter</span>
@@ -508,7 +508,7 @@ Sklearn centroids:
 </section>
 <section id="sklearn-check" class="level3">
 <h3 class="anchored" data-anchor-id="sklearn-check">4.5 Sklearn check</h3>
-<div id="96658c5a" class="cell" data-execution_count="11">
+<div id="0fdbb443" class="cell" data-execution_count="11">
 <details class="code-fold">
 <summary>Show / Hide Code</summary>
 <div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.neighbors <span class="im">import</span> KNeighborsClassifier</span>
@@ -522,7 +522,7 @@ Sklearn centroids:
 </section>
 <section id="decision-surface" class="level3">
 <h3 class="anchored" data-anchor-id="decision-surface">4.6 Decision surface</h3>
-<div id="dc00ddf1" class="cell" data-execution_count="12">
+<div id="f1523a2a" class="cell" data-execution_count="12">
 <details class="code-fold">
 <summary>Show / Hide Code</summary>
 <div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>xx,yy<span class="op">=</span>np.meshgrid(np.linspace(<span class="op">-</span><span class="dv">3</span>,<span class="dv">3</span>,<span class="dv">400</span>),np.linspace(<span class="op">-</span><span class="dv">3</span>,<span class="dv">3</span>,<span class="dv">400</span>))</span>
@@ -548,7 +548,7 @@ Sklearn centroids:
 </section>
 </section>
 <section id="discussion" class="level2">
-<h2 class="anchored" data-anchor-id="discussion">5 Discussion</h2>
+<h2 class="anchored" data-anchor-id="discussion">5. Discussion</h2>
 <ul>
 <li><strong>K-Means:</strong> Both WCSS elbow and silhouette concur on K = 3. Animated convergence shows stable centroids in &lt; 10 iterations.<br>
 </li>
@@ -559,61 +559,60 @@ Sklearn centroids:
 <hr>
 </section>
 <section id="full-code" class="level2">
-<h2 class="anchored" data-anchor-id="full-code">6 Full Code</h2>
-<div id="ed2ce612" class="cell" data-execution_count="13">
+<h2 class="anchored" data-anchor-id="full-code">6. Full Code</h2>
+<div id="54940e9e" class="cell" data-execution_count="13">
 <details class="code-fold">
 <summary>Show / Hide Code</summary>
-<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Re-run end-to-end: K-Means diagnostics + K-NN evaluation</span></span>
-<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd, numpy <span class="im">as</span> np, matplotlib.pyplot <span class="im">as</span> plt</span>
-<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.preprocessing <span class="im">import</span> StandardScaler</span>
-<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.cluster <span class="im">import</span> KMeans</span>
-<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.metrics <span class="im">import</span> silhouette_score</span>
-<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.neighbors <span class="im">import</span> KNeighborsClassifier</span>
-<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> collections <span class="im">import</span> Counter</span>
-<span id="cb16-9"><a href="#cb16-9" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> PIL <span class="im">import</span> Image, ImageDraw</span>
-<span id="cb16-10"><a href="#cb16-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-11"><a href="#cb16-11" aria-hidden="true" tabindex="-1"></a><span class="co"># K-Means </span></span>
-<span id="cb16-12"><a href="#cb16-12" aria-hidden="true" tabindex="-1"></a>penguins <span class="op">=</span> pd.read_csv(<span class="st">"palmer_penguins.csv"</span>)</span>
-<span id="cb16-13"><a href="#cb16-13" aria-hidden="true" tabindex="-1"></a>X <span class="op">=</span> StandardScaler().fit_transform(penguins[[<span class="st">"bill_length_mm"</span>,<span class="st">"flipper_length_mm"</span>]].dropna())</span>
-<span id="cb16-14"><a href="#cb16-14" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-15"><a href="#cb16-15" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> kmeans_custom(X,k,max_iter<span class="op">=</span><span class="dv">100</span>,seed<span class="op">=</span><span class="dv">42</span>):</span>
-<span id="cb16-16"><a href="#cb16-16" aria-hidden="true" tabindex="-1"></a>    rng<span class="op">=</span>np.random.default_rng(seed)</span>
-<span id="cb16-17"><a href="#cb16-17" aria-hidden="true" tabindex="-1"></a>    c<span class="op">=</span>X[rng.choice(<span class="bu">len</span>(X),k,<span class="va">False</span>)]<span class="op">;</span> history<span class="op">=</span>[c.copy()]</span>
-<span id="cb16-18"><a href="#cb16-18" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> _ <span class="kw">in</span> <span class="bu">range</span>(max_iter):</span>
-<span id="cb16-19"><a href="#cb16-19" aria-hidden="true" tabindex="-1"></a>        d<span class="op">=</span>np.linalg.norm(X[:,<span class="va">None</span>,:]<span class="op">-</span>c[<span class="va">None</span>,:,:],axis<span class="op">=</span><span class="dv">2</span>)<span class="op">;</span> lab<span class="op">=</span>d.argmin(<span class="dv">1</span>)</span>
-<span id="cb16-20"><a href="#cb16-20" aria-hidden="true" tabindex="-1"></a>        n<span class="op">=</span>np.array([X[lab<span class="op">==</span>i].mean(<span class="dv">0</span>) <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(k)])<span class="op">;</span> history.append(n.copy())</span>
-<span id="cb16-21"><a href="#cb16-21" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> np.allclose(c,n): <span class="cf">break</span><span class="op">;</span> c<span class="op">=</span>n</span>
-<span id="cb16-22"><a href="#cb16-22" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> lab,c,history</span>
-<span id="cb16-23"><a href="#cb16-23" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-24"><a href="#cb16-24" aria-hidden="true" tabindex="-1"></a>lab,c,hist<span class="op">=</span>kmeans_custom(X,<span class="dv">3</span>)</span>
-<span id="cb16-25"><a href="#cb16-25" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Custom centroids:"</span>,c)</span>
-<span id="cb16-26"><a href="#cb16-26" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Sklearn centroids:"</span>,</span>
-<span id="cb16-27"><a href="#cb16-27" aria-hidden="true" tabindex="-1"></a>      KMeans(n_clusters<span class="op">=</span><span class="dv">3</span>,n_init<span class="op">=</span><span class="dv">10</span>,random_state<span class="op">=</span><span class="dv">42</span>).fit(X).cluster_centers_)</span>
-<span id="cb16-28"><a href="#cb16-28" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-29"><a href="#cb16-29" aria-hidden="true" tabindex="-1"></a><span class="co"># K-NN </span></span>
-<span id="cb16-30"><a href="#cb16-30" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> gen(seed):</span>
-<span id="cb16-31"><a href="#cb16-31" aria-hidden="true" tabindex="-1"></a>    np.random.seed(seed)<span class="op">;</span> n<span class="op">=</span><span class="dv">100</span></span>
-<span id="cb16-32"><a href="#cb16-32" aria-hidden="true" tabindex="-1"></a>    x1<span class="op">=</span>np.random.uniform(<span class="op">-</span><span class="dv">3</span>,<span class="dv">3</span>,n)<span class="op">;</span> x2<span class="op">=</span>np.random.uniform(<span class="op">-</span><span class="dv">3</span>,<span class="dv">3</span>,n)</span>
-<span id="cb16-33"><a href="#cb16-33" aria-hidden="true" tabindex="-1"></a>    y<span class="op">=</span>(x2<span class="op">&gt;</span>np.sin(<span class="dv">4</span><span class="op">*</span>x1)<span class="op">+</span>x1).astype(<span class="bu">int</span>)</span>
-<span id="cb16-34"><a href="#cb16-34" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> pd.DataFrame(<span class="bu">dict</span>(x1<span class="op">=</span>x1,x2<span class="op">=</span>x2,y<span class="op">=</span>y))</span>
-<span id="cb16-35"><a href="#cb16-35" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-36"><a href="#cb16-36" aria-hidden="true" tabindex="-1"></a>train<span class="op">=</span>gen(<span class="dv">42</span>)<span class="op">;</span> test<span class="op">=</span>gen(<span class="dv">2025</span>)</span>
-<span id="cb16-37"><a href="#cb16-37" aria-hidden="true" tabindex="-1"></a>Xtr,ytr<span class="op">=</span>train[[<span class="st">"x1"</span>,<span class="st">"x2"</span>]].values,train.y.values</span>
-<span id="cb16-38"><a href="#cb16-38" aria-hidden="true" tabindex="-1"></a>Xte,yte<span class="op">=</span>test[[<span class="st">"x1"</span>,<span class="st">"x2"</span>]].values,test.y.values</span>
-<span id="cb16-39"><a href="#cb16-39" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-40"><a href="#cb16-40" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> knn(Xtr,ytr,Xte,k):</span>
-<span id="cb16-41"><a href="#cb16-41" aria-hidden="true" tabindex="-1"></a>    out<span class="op">=</span>[]</span>
-<span id="cb16-42"><a href="#cb16-42" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> x <span class="kw">in</span> Xte:</span>
-<span id="cb16-43"><a href="#cb16-43" aria-hidden="true" tabindex="-1"></a>        d<span class="op">=</span>np.linalg.norm(Xtr<span class="op">-</span>x,axis<span class="op">=</span><span class="dv">1</span>)</span>
-<span id="cb16-44"><a href="#cb16-44" aria-hidden="true" tabindex="-1"></a>        out.append(Counter(ytr[d.argsort()[:k]]).most_common(<span class="dv">1</span>)[<span class="dv">0</span>][<span class="dv">0</span>])</span>
-<span id="cb16-45"><a href="#cb16-45" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> np.array(out)</span>
-<span id="cb16-46"><a href="#cb16-46" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-47"><a href="#cb16-47" aria-hidden="true" tabindex="-1"></a>acc<span class="op">=</span>[(knn(Xtr,ytr,Xte,k)<span class="op">==</span>yte).mean() <span class="cf">for</span> k <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">1</span>,<span class="dv">31</span>)]</span>
-<span id="cb16-48"><a href="#cb16-48" aria-hidden="true" tabindex="-1"></a>best_k<span class="op">=</span>np.argmax(acc)<span class="op">+</span><span class="dv">1</span></span>
-<span id="cb16-49"><a href="#cb16-49" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Best k:"</span>,best_k,<span class="st">" Custom acc:"</span>,acc[best_k<span class="op">-</span><span class="dv">1</span>],</span>
-<span id="cb16-50"><a href="#cb16-50" aria-hidden="true" tabindex="-1"></a>      <span class="st">" Sklearn acc:"</span>,</span>
-<span id="cb16-51"><a href="#cb16-51" aria-hidden="true" tabindex="-1"></a>      KNeighborsClassifier(n_neighbors<span class="op">=</span>best_k).fit(Xtr,ytr).score(Xte,yte))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Imports</span></span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd, numpy <span class="im">as</span> np, matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.preprocessing <span class="im">import</span> StandardScaler</span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.cluster <span class="im">import</span> KMeans</span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.metrics <span class="im">import</span> silhouette_score</span>
+<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.neighbors <span class="im">import</span> KNeighborsClassifier</span>
+<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> collections <span class="im">import</span> Counter</span>
+<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> PIL <span class="im">import</span> Image, ImageDraw</span>
+<span id="cb16-9"><a href="#cb16-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-10"><a href="#cb16-10" aria-hidden="true" tabindex="-1"></a><span class="co"># K-Means </span></span>
+<span id="cb16-11"><a href="#cb16-11" aria-hidden="true" tabindex="-1"></a>penguins <span class="op">=</span> pd.read_csv(<span class="st">"palmer_penguins.csv"</span>)</span>
+<span id="cb16-12"><a href="#cb16-12" aria-hidden="true" tabindex="-1"></a>X <span class="op">=</span> StandardScaler().fit_transform(penguins[[<span class="st">"bill_length_mm"</span>,<span class="st">"flipper_length_mm"</span>]].dropna())</span>
+<span id="cb16-13"><a href="#cb16-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-14"><a href="#cb16-14" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> kmeans_custom(X,k,max_iter<span class="op">=</span><span class="dv">100</span>,seed<span class="op">=</span><span class="dv">42</span>):</span>
+<span id="cb16-15"><a href="#cb16-15" aria-hidden="true" tabindex="-1"></a>    rng<span class="op">=</span>np.random.default_rng(seed)</span>
+<span id="cb16-16"><a href="#cb16-16" aria-hidden="true" tabindex="-1"></a>    c<span class="op">=</span>X[rng.choice(<span class="bu">len</span>(X),k,<span class="va">False</span>)]<span class="op">;</span> history<span class="op">=</span>[c.copy()]</span>
+<span id="cb16-17"><a href="#cb16-17" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> _ <span class="kw">in</span> <span class="bu">range</span>(max_iter):</span>
+<span id="cb16-18"><a href="#cb16-18" aria-hidden="true" tabindex="-1"></a>        d<span class="op">=</span>np.linalg.norm(X[:,<span class="va">None</span>,:]<span class="op">-</span>c[<span class="va">None</span>,:,:],axis<span class="op">=</span><span class="dv">2</span>)<span class="op">;</span> lab<span class="op">=</span>d.argmin(<span class="dv">1</span>)</span>
+<span id="cb16-19"><a href="#cb16-19" aria-hidden="true" tabindex="-1"></a>        n<span class="op">=</span>np.array([X[lab<span class="op">==</span>i].mean(<span class="dv">0</span>) <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(k)])<span class="op">;</span> history.append(n.copy())</span>
+<span id="cb16-20"><a href="#cb16-20" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> np.allclose(c,n): <span class="cf">break</span><span class="op">;</span> c<span class="op">=</span>n</span>
+<span id="cb16-21"><a href="#cb16-21" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> lab,c,history</span>
+<span id="cb16-22"><a href="#cb16-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-23"><a href="#cb16-23" aria-hidden="true" tabindex="-1"></a>lab,c,hist<span class="op">=</span>kmeans_custom(X,<span class="dv">3</span>)</span>
+<span id="cb16-24"><a href="#cb16-24" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Custom centroids:"</span>,c)</span>
+<span id="cb16-25"><a href="#cb16-25" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Sklearn centroids:"</span>,</span>
+<span id="cb16-26"><a href="#cb16-26" aria-hidden="true" tabindex="-1"></a>      KMeans(n_clusters<span class="op">=</span><span class="dv">3</span>,n_init<span class="op">=</span><span class="dv">10</span>,random_state<span class="op">=</span><span class="dv">42</span>).fit(X).cluster_centers_)</span>
+<span id="cb16-27"><a href="#cb16-27" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-28"><a href="#cb16-28" aria-hidden="true" tabindex="-1"></a><span class="co"># K-NN </span></span>
+<span id="cb16-29"><a href="#cb16-29" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> gen(seed):</span>
+<span id="cb16-30"><a href="#cb16-30" aria-hidden="true" tabindex="-1"></a>    np.random.seed(seed)<span class="op">;</span> n<span class="op">=</span><span class="dv">100</span></span>
+<span id="cb16-31"><a href="#cb16-31" aria-hidden="true" tabindex="-1"></a>    x1<span class="op">=</span>np.random.uniform(<span class="op">-</span><span class="dv">3</span>,<span class="dv">3</span>,n)<span class="op">;</span> x2<span class="op">=</span>np.random.uniform(<span class="op">-</span><span class="dv">3</span>,<span class="dv">3</span>,n)</span>
+<span id="cb16-32"><a href="#cb16-32" aria-hidden="true" tabindex="-1"></a>    y<span class="op">=</span>(x2<span class="op">&gt;</span>np.sin(<span class="dv">4</span><span class="op">*</span>x1)<span class="op">+</span>x1).astype(<span class="bu">int</span>)</span>
+<span id="cb16-33"><a href="#cb16-33" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> pd.DataFrame(<span class="bu">dict</span>(x1<span class="op">=</span>x1,x2<span class="op">=</span>x2,y<span class="op">=</span>y))</span>
+<span id="cb16-34"><a href="#cb16-34" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-35"><a href="#cb16-35" aria-hidden="true" tabindex="-1"></a>train<span class="op">=</span>gen(<span class="dv">42</span>)<span class="op">;</span> test<span class="op">=</span>gen(<span class="dv">2025</span>)</span>
+<span id="cb16-36"><a href="#cb16-36" aria-hidden="true" tabindex="-1"></a>Xtr,ytr<span class="op">=</span>train[[<span class="st">"x1"</span>,<span class="st">"x2"</span>]].values,train.y.values</span>
+<span id="cb16-37"><a href="#cb16-37" aria-hidden="true" tabindex="-1"></a>Xte,yte<span class="op">=</span>test[[<span class="st">"x1"</span>,<span class="st">"x2"</span>]].values,test.y.values</span>
+<span id="cb16-38"><a href="#cb16-38" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-39"><a href="#cb16-39" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> knn(Xtr,ytr,Xte,k):</span>
+<span id="cb16-40"><a href="#cb16-40" aria-hidden="true" tabindex="-1"></a>    out<span class="op">=</span>[]</span>
+<span id="cb16-41"><a href="#cb16-41" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> x <span class="kw">in</span> Xte:</span>
+<span id="cb16-42"><a href="#cb16-42" aria-hidden="true" tabindex="-1"></a>        d<span class="op">=</span>np.linalg.norm(Xtr<span class="op">-</span>x,axis<span class="op">=</span><span class="dv">1</span>)</span>
+<span id="cb16-43"><a href="#cb16-43" aria-hidden="true" tabindex="-1"></a>        out.append(Counter(ytr[d.argsort()[:k]]).most_common(<span class="dv">1</span>)[<span class="dv">0</span>][<span class="dv">0</span>])</span>
+<span id="cb16-44"><a href="#cb16-44" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> np.array(out)</span>
+<span id="cb16-45"><a href="#cb16-45" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-46"><a href="#cb16-46" aria-hidden="true" tabindex="-1"></a>acc<span class="op">=</span>[(knn(Xtr,ytr,Xte,k)<span class="op">==</span>yte).mean() <span class="cf">for</span> k <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">1</span>,<span class="dv">31</span>)]</span>
+<span id="cb16-47"><a href="#cb16-47" aria-hidden="true" tabindex="-1"></a>best_k<span class="op">=</span>np.argmax(acc)<span class="op">+</span><span class="dv">1</span></span>
+<span id="cb16-48"><a href="#cb16-48" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Best k:"</span>,best_k,<span class="st">" Custom acc:"</span>,acc[best_k<span class="op">-</span><span class="dv">1</span>],</span>
+<span id="cb16-49"><a href="#cb16-49" aria-hidden="true" tabindex="-1"></a>      <span class="st">" Sklearn acc:"</span>,</span>
+<span id="cb16-50"><a href="#cb16-50" aria-hidden="true" tabindex="-1"></a>      KNeighborsClassifier(n_neighbors<span class="op">=</span>best_k).fit(Xtr,ytr).score(Xte,yte))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>Custom centroids: [[ 0.45915754  1.14564997]

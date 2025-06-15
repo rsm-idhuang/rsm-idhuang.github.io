@@ -15,19 +15,19 @@ execute:
 callout-appearance: minimal
 ---
 
-## 1 Overview  
+## 1. Overview  
 
 This homework has two main parts:
 
-* **Part 3 – K-Means (unsupervised):**  
-  You will implement the K-means algorithm from scratch, apply it to the *Palmer Penguins* dataset using **bill length** and **flipper length**, and visualise the algorithm’s progress.  Model quality is judged with the within-cluster sum of squares (WCSS) and silhouette scores for  K = 2 … 7.  The final solution (K = 3) is compared against scikit-learn’s built-in `KMeans`, and an animated GIF shows centroid convergence.
+* **K-Means (unsupervised):**  
+  The K-means algorithm was implemented from scratch, applied to the *Palmer Penguins* dataset using **bill length** and **flipper length**.  Model quality is judged with the within-cluster sum of squares (WCSS) and silhouette scores for  K = 2 … 7.  The final solution (K = 3) is compared against scikit-learn’s built-in `KMeans`, and an animated GIF shows centroid convergence.
 
-* **Part 4 – K-Nearest Neighbours (supervised):**  
-  A synthetic 2-dimensional, non-linear classification problem is generated with a wiggly sine boundary.  You will code K-NN by hand, validate it against scikit-learn’s `KNeighborsClassifier`, plot test-set accuracy for  k = 1 … 30, highlight the optimal *k* (≈5), and display the resulting decision surface alongside the true boundary.
+* **K-Nearest Neighbours (supervised):**  
+  A synthetic 2-dimensional, non-linear classification problem is generated with a wiggly sine boundary. K-NN is coded by hand and validated against scikit-learn’s `KNeighborsClassifier`. Test-set accuracy was plotted for  k = 1 … 30, highlight the optimal *k* (≈5), and display the resulting decision surface alongside the true boundary.
 
 ---
 
-## 2 Load Data  
+## 2. Load Data  
 
 ```{python}
 import pandas as pd
@@ -37,7 +37,7 @@ penguins.head()
 
 ---
 
-## 3 K-Means (1a)
+## 3. K-Means (1a)
 
 ### 3.1 Scale features  
 ```{python}
@@ -115,7 +115,7 @@ The elbow in WCSS and the highest silhouette score both occur at **K = 3**, matc
 
 ---
 
-## 4 K-Nearest Neighbours (2a)
+## 4. K-Nearest Neighbours (2a)
 
 ### 4.1 Training data (seed 42)  
 ```{python}
@@ -189,7 +189,7 @@ Accuracy peaks at **k = 5 (~95 %)**: small k overfits noise; large k oversmooths
 
 ---
 
-## 5 Discussion  
+## 5. Discussion  
 
 * **K-Means:** Both WCSS elbow and silhouette concur on K = 3. Animated convergence shows stable centroids in < 10 iterations.  
 * **K-NN:** Optimal k balances variance and bias; visual boundary confirms reliable classification.  
@@ -197,11 +197,10 @@ Accuracy peaks at **k = 5 (~95 %)**: small k overfits noise; large k oversmooths
 
 ---
 
-## 6 Full Code
+## 6. Full Code
 
 ```{python, echo=FALSE}
-# Re-run end-to-end: K-Means diagnostics + K-NN evaluation
-
+# Imports
 import pandas as pd, numpy as np, matplotlib.pyplot as plt
 from sklearn.preprocessing import StandardScaler
 from sklearn.cluster import KMeans
